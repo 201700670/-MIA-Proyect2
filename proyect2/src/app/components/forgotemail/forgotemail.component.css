@@ -1,0 +1,23 @@
+mat-button{
+    background-color: brown;
+}
+
+#boton_1{
+    text-decoration: none;
+    padding: 2px;
+    padding-left: 70px;
+    padding-right: 70px;
+    font-family: 'Times New Roman';
+    font-weight: 300;
+    font-size: 16px;
+    color: #b5f506;
+    border-radius: 18px;
+    border: 3px double #ebfc04;
+    -webkit-box-shadow: 2px 3px 5px 0px rgba(248, 250, 219, 0.75);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(252, 251, 189, 0.75);
+    box-shadow: 2px 3px 5px 0px rgba(240, 255, 254, 0.75);
+  }
+  #boton_1:hover{
+    opacity: 0.6;
+    text-decoration: none;
+  }

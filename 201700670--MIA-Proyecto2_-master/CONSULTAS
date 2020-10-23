@@ -1,0 +1,250 @@
+select * from all_tables;
+select * from v$database;
+
+CREATE TABLE usuario(
+   nombre VARCHAR2(100),
+   contrasena char(32)
+)
+
+insert into usuario(nombre,contrasena)values('Andrea',DBMS_OBFUSCATION_TOOLKIT.MD5(INPUT =>
+UTL_RAW.CAST_TO_RAW ('12345678')));
+
+SELECT nombre,contrasena FROM usuario where contrasena = DBMS_OBFUSCATION_TOOLKIT.MD5(INPUT =>
+UTL_RAW.CAST_TO_RAW ('12345678'));
+
+select * from usuario;
+
+drop table usuario
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////CONSULTAS MYSQL////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema Proyecto2
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema Proyecto2
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS Proyecto2 ;
+USE Proyecto2 ;
+
+-- -----------------------------------------------------
+-- Table Proyecto2.Usuario
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Proyecto2.Usuario (
+  idUsuario INT NOT NULL,
+  nombre VARCHAR(50) NOT NULL,
+  apellido VARCHAR(50) NOT NULL,
+  correo_electronico VARCHAR(50) NOT NULL,
+  contrasena CHAR(32) NOT NULL,
+  fecha_nacimiento DATE NOT NULL,
+  pais VARCHAR(45) NOT NULL,
+  foto VARCHAR(100) NOT NULL,
+  creditos DECIMAL(10,3) NOT NULL,
+  PRIMARY KEY (idUsuario))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Proyecto2.Administrador
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Proyecto2.Administrador (
+  idAdministrador INT NOT NULL,
+  PRIMARY KEY (idAdministrador),
+  CONSTRAINT Usuario
+    FOREIGN KEY (idAdministrador)
+    REFERENCES Proyecto2.Usuario (idUsuario)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Proyecto2.Cliente
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Proyecto2.Cliente (
+  idCliente INT NOT NULL,
+  PRIMARY KEY (idCliente),
+  CONSTRAINT Usuario
+    FOREIGN KEY (idCliente)
+    REFERENCES Proyecto2.Usuario (idUsuario)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Proyecto2.Categoria
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Proyecto2.Categoria (
+  idCategoria INT NOT NULL,
+  nombre VARCHAR(50) NOT NULL,
+  PRIMARY KEY (idCategoria))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Proyecto2.Palabra_clave
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Proyecto2.Palabra_clave (
+  idPalabra_clave INT NOT NULL,
+  nombre VARCHAR(50) NOT NULL,
+  PRIMARY KEY (idPalabra_clave))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Proyecto2.Producto
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Proyecto2.Producto (
+  nombre VARCHAR(50) NOT NULL,
+  precio DECIMAL(9,2) NOT NULL,
+  Detalle_producto VARCHAR(400) NOT NULL,
+  estado INT NOT NULL,
+  palabras_clave INT NOT NULL,
+  categoria INT NOT NULL,
+  PRIMARY KEY (nombre),
+  INDEX Categoria_idx (categoria ASC) VISIBLE,
+  INDEX Claves_idx (palabras_clave ASC) VISIBLE,
+  CONSTRAINT Categoria
+    FOREIGN KEY (categoria)
+    REFERENCES Proyecto2.Categoria (idCategoria)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT Claves
+    FOREIGN KEY (palabras_clave)
+    REFERENCES Proyecto2.Palabra_clave (idPalabra_clave)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Proyecto2.Venta
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Proyecto2.Venta (
+  idVenta INT NOT NULL,
+  idCliente INT NOT NULL,
+  producto VARCHAR(50) NOT NULL,
+  PRIMARY KEY (idVenta),
+  INDEX Cliente_idx (idCliente ASC) VISIBLE,
+  INDEX VentaProducto_idx (producto ASC) VISIBLE,
+  CONSTRAINT Cliente
+    FOREIGN KEY (idCliente)
+    REFERENCES Proyecto2.Cliente (idCliente)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT VentaProducto
+    FOREIGN KEY (producto)
+    REFERENCES Proyecto2.Producto (nombre)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Proyecto2.Compra
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Proyecto2.Compra (
+  idCompra INT NOT NULL,
+  TotalCompra DECIMAL(9,2) NOT NULL,
+  idCliente INT NOT NULL,
+  PRIMARY KEY (idCompra),
+  INDEX Cliente_idx (idCliente ASC) VISIBLE,
+  CONSTRAINT Cliente
+    FOREIGN KEY (idCliente)
+    REFERENCES Proyecto2.Cliente (idCliente)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Proyecto2.Detalle_compra
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Proyecto2.Detalle_compra (
+  idDetalle_compra INT NOT NULL,
+  cantidad INT NOT NULL,
+  subtotal DECIMAL(9,2) NOT NULL,
+  producto VARCHAR(50) NOT NULL,
+  idCompra INT NOT NULL,
+  PRIMARY KEY (idDetalle_compra),
+  INDEX Compra_idx (idCompra ASC) VISIBLE,
+  INDEX Productoname_idx (producto ASC) VISIBLE,
+  CONSTRAINT Compra
+    FOREIGN KEY (idCompra)
+    REFERENCES Proyecto2.Compra (idCompra)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT Productoname
+    FOREIGN KEY (producto)
+    REFERENCES Proyecto2.Producto (nombre)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Proyecto2.Comentario
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Proyecto2.Comentario (
+  idComentario INT NOT NULL,
+  Coment VARCHAR(100) NOT NULL,
+  fecha_comentario DATE NOT NULL,
+  idCliente INT NOT NULL,
+  producto VARCHAR(50) NOT NULL,
+  PRIMARY KEY (idComentario),
+  INDEX Clientecomment_idx (idCliente ASC) VISIBLE,
+  INDEX productocomment_idx (producto ASC) VISIBLE,
+  CONSTRAINT Clientecomment
+    FOREIGN KEY (idCliente)
+    REFERENCES Proyecto2.Cliente (idCliente)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT productocomment
+    FOREIGN KEY (producto)
+    REFERENCES Proyecto2.Producto (nombre)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Proyecto2.Denuncia
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Proyecto2.Denuncia (
+  idDenuncia INT NOT NULL,
+  descripcion VARCHAR(100) NOT NULL,
+  estado INT NOT NULL,
+  fecha DATE NOT NULL,
+  idCliente INT NOT NULL,
+  producto VARCHAR(50) NOT NULL,
+  PRIMARY KEY (idDenuncia),
+  INDEX pruductdenuncia_idx (producto ASC) VISIBLE,
+  INDEX denunciaclient_idx (idCliente ASC) VISIBLE,
+  CONSTRAINT denunciaclient
+    FOREIGN KEY (idCliente)
+    REFERENCES Proyecto2.Cliente (idCliente)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT pruductdenuncia
+    FOREIGN KEY (producto)
+    REFERENCES Proyecto2.Producto (nombre)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+//para modelo ./datamodeler.sh

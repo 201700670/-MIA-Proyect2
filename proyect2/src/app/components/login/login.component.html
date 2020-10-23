@@ -1,0 +1,53 @@
+
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="#">GTSales Marketplace</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>Home<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+  <a href="registro" class="btn btn-outline-success my-2 my-sm-0" type="submit">REGISTRARSE</a>
+</nav>
+
+</header>
+
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <mat-card >
+        <h1 id="card"><mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon> Sign in</h1>
+    </mat-card>
+    <mat-card id="card1">
+        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label><mat-icon aria-hidden="false" aria-label="Example home icon">alternate_email</mat-icon> Enter your Email</mat-label>
+        <input   matInput [(ngModel)]="correo" name="correo" placeholder="ejemplo@email.com">
+        </mat-form-field>
+        <br>
+        <mat-form-field  class="example-full-width" appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [(ngModel)]="contra" name="contra" [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        </mat-form-field>
+        <br>
+        <a href="registro" class="btn btn-outline-success my-2 my-sm-0" type="submit">REGISTRARSE</a>
+        <a mat-button id="liking" (click)="openDialog()">Forgot password?</a>
+        <br>
+        <br>
+        <!-- Sign in button -->
+        <a color="info" id="boton_1" type="submit" (click)="Importando()">LOGIN</a>
+        <br>
+        <br>
+    </mat-card>
+
+</body>

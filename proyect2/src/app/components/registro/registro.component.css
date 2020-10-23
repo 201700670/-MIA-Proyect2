@@ -1,0 +1,152 @@
+header {
+    background-image:url("https://i.pinimg.com/736x/cc/0d/5c/cc0d5c3a25a5333ef3ff77e66d85cf02.jpg");
+    }
+    
+      header nav {
+        background-image: linear-gradient(90deg, #8adbf7 0%, #c1ffae 20%, #fff0ae 49%, #fcafaf 70%, #dfa0fc 100%);
+        width: 100%;
+        margin: 0;
+        position: fixed;
+        -webkit-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
+      }
+      header nav:navbar-expand-lg navbar-light bg-light {
+        animation:slidebg 2s linear infinite;
+      }
+  
+      .header{
+        text-align: center;
+      }
+      .content{
+        margin: 100 px;
+      }
+      #btnUpload{
+        cursor: pointer;
+      }
+  
+    mat-card{
+        text-align: center;
+        margin-left: 20%;
+        margin-right: 20%;
+        -webkit-box-shadow: 2px 3px 5px 0px rgba(27, 19, 19, 0.75);
+        -moz-box-shadow: 2px 3px 5px 0px rgba(29, 26, 26, 0.781);
+        box-shadow: 2px 3px 5px 0px rgba(14, 13, 13, 0.75);
+    }
+      #card{
+        text-align: center;
+        font-family: 'Times New Roman';
+        color: #fddf8d;
+        border-radius: 15px;
+        border: 3px double #fdec8d;
+    }
+    #card1{
+        text-align: center;
+        margin-block-end: -1000%;
+        background-color: rgb(41, 38, 38);
+        -webkit-box-shadow: 2px 3px 5px 0px rgba(44, 40, 40, 0.75);
+        -moz-box-shadow: 2px 3px 5px 0px rgba(39, 36, 36, 0.75);
+        box-shadow: 2px 3px 5px 0px rgba(17, 17, 17, 0.75);
+    }
+   #card2{
+      margin-left: 1%;
+      margin-right: 1%;
+     -webkit-box-shadow: 2px 3px 5px 0px rgba(44, 40, 40, 0.75);
+     -moz-box-shadow: 2px 3px 5px 0px rgba(39, 36, 36, 0.75);
+     box-shadow: 2px 3px 5px 0px rgba(17, 17, 17, 0.75);
+  }
+    body{
+      background-image:url("https://i.pinimg.com/originals/e7/d3/83/e7d383a9ddb7187adfe162110055b121.jpg");
+      margin-block-end: -10000%;
+      background-size: 700px 500px;
+  }
+  #boton_1{
+    text-decoration: none;
+    padding: 3px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-right: 50px;
+    font-family: 'Times New Roman';
+    font-weight: 700;
+    font-size: 16px;
+    color: #0fdd08;
+    border-radius: 15px;
+    border: 3px double #44dd08;
+    -webkit-box-shadow: 2px 3px 5px 0px rgba(193, 240, 241, 0.75);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(112, 253, 253, 0.75);
+    box-shadow: 2px 3px 5px 0px rgba(240, 255, 254, 0.75);
+  }
+  #boton_1:hover{
+    opacity: 0.6;
+    text-decoration: none;
+  }
+  
+  #boton_2{
+    text-decoration: none;
+    padding: 3px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-right: 40px;
+    font-family: 'Times New Roman';
+    font-weight: 700;
+    font-size: 16px;
+    color: #dd085a;
+    border-radius: 15px;
+    border: 3px double #dd085a;
+    -webkit-box-shadow: 2px 3px 5px 0px rgba(193, 240, 241, 0.75);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(112, 253, 253, 0.75);
+    box-shadow: 2px 3px 5px 0px rgba(240, 255, 254, 0.75);
+  }
+  #boton_2:hover{
+    opacity: 0.6;
+    text-decoration: none;
+  }
+  #espacio{
+    margin-top: 10%;
+  }
+  mat-form-field {
+    margin-right: 12px;
+  }
+  
+  #imgRedonda {
+    width:150px;
+    height:150px;
+    border-radius:150px;
+  }
+  #espacioabajo{
+    height: 10px;
+  }
+  
+  #fondo{
+   
+    background-color: green;
+  }
+  
+  .example-container .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  .example-form mat-slide-toggle {
+    margin: 8px 0;
+    display: block;
+    color: #8adbf7;
+  }
+  
+  #boton_3{
+    text-decoration: none;
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Times New Roman';
+    font-weight: 700;
+    font-size: 16px;
+    color: #08dddd;
+    border-radius: 15px;
+    border: 3px double #08dddd;
+    -webkit-box-shadow: 2px 3px 5px 0px rgba(193, 240, 241, 0.75);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(112, 253, 253, 0.75);
+    box-shadow: 2px 3px 5px 0px rgba(240, 255, 254, 0.75);
+  }
+  #boton_3:hover{
+    opacity: 0.6;
+    text-decoration: none;
+  }

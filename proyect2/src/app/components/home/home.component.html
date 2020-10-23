@@ -1,0 +1,152 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<header>
+<div class="topnav" id="myTopnav">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
+    
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+      <a class="navbar-brand" href="#">GTSales Marketplace</a>
+        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+      <a href="crud" class="btn btn-outline-success my-2 my-sm-0" type="submit">LOGIN</a>
+      </li>
+    </ul>
+  
+  
+</nav>
+</div>
+
+</header>
+
+<body class="Body" id="Body">
+
+<ngb-carousel *ngIf="images">
+  <ng-template ngbSlide>
+  
+    <div class="picsum-img-wrapper">
+      <img [src]="images[0]" alt="Random first slide" class="w-100">
+    </div>
+    <div class="carousel-caption">
+      <h3> En GTSales Marketplace</h3>
+      <p><b>El futuro es hoy, cuentas con...</b></p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[1]" alt="Random second slide" class="w-100">
+    </div>
+    <div class="carousel-caption">
+      <h3>LA MEJOR TECNOLOGÍA</h3>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[2]"  alt="Random third slide" class="w-100">
+    </div>
+    <div class="carousel-caption">
+      <h3 id="h3color"><b>TODO PARA EL HOGAR</b></h3>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[3]" alt="Random fourth slide " class="w-100">
+    </div>
+    <div class="carousel-caption">
+      <h3 id= "h3color2"><b>A TU COCINA NO LE FALTARÁ NADA</b></h3>
+      <h5 id= "h3color2"><b>Regístrate y comienza la experiencia</b></h5>
+    </div>
+  </ng-template>
+</ngb-carousel>
+</body>
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="topnav" id="myTopnav">
+    <a class="nav-link" href="#"><mat-icon aria-hidden="false" aria-label="Example home icon"></mat-icon>GTSales Marketplace<span class="sr-only">(current)</span></a>
+    <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>Home<span class="sr-only">(current)</span></a>
+
+
+</div>
+<div>
+<ngb-carousel *ngIf="images">
+  <ng-template ngbSlide>
+<img [src]="images[0]" alt="Random first slide" class="w-100" width="auto">
+    <div class="carousel-caption">
+      <h3>First slide label</h3>
+      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+<img [src]="images[1]" alt="Random second slide" class="w-100" width="auto">
+    <div class="carousel-caption">
+      <h3>Second slide label</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+<img [src]="images[2]" alt="Random third slide" class="w-100" width="auto">
+    <div class="carousel-caption">
+      <h3>Third slide label</h3>
+      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+    </div>
+  </ng-template>
+</ngb-carousel>
+</div>-->
+<!--<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="#">GTSales Marketplace</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>Home<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+  <a href="login" class="btn btn-outline-success my-2 my-sm-0" type="submit">LOGIN</a>
+</nav>
+<div class="wrapper">
+<ngb-carousel *ngIf="images">
+  <ng-template ngbSlide>
+  
+    <div class="picsum-img-wrapper">
+      <img [src]="images[0]" alt="Random first slide">
+    </div>
+    <div class="carousel-caption">
+      <h3> En GTSales Marketplace</h3>
+      <p><b>El futuro es hoy, cuentas con...</b></p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[1]" alt="Random second slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>LA MEJOR TECNOLOGÍA</h3>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[2]"  alt="Random third slide">
+    </div>
+    <div class="carousel-caption">
+      <h3 id="h3color"><b>TODO PARA EL HOGAR</b></h3>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[3]" alt="Random fourth slide">
+    </div>
+    <div class="carousel-caption">
+      <h3 id= "h3color2"><b>A TU COCINA NO LE FALTARÁ NADA</b></h3>
+      <h5 id= "h3color2"><b>Regístrate y comienza la experiencia</b></h5>
+    </div>
+  </ng-template>
+</ngb-carousel>
+</div>
+</header>-->
+ 

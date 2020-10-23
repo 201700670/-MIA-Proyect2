@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>INGRESA TU CORREO ELECTRÓNICO</h1>
+<div mat-dialog-content>Se enviará un mensaje para reestablecer la contraseña
+    <br>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label><mat-icon aria-hidden="false" aria-label="Example home icon">alternate_email</mat-icon> Enter your email</mat-label>
+        <input   matInput [(ngModel)]="correo" name="correo" placeholder="ejemplo@email.com">
+        </mat-form-field>
+        <br>
+</div>
+
+<div mat-dialog-actions>
+    <a mat-button id="boton_1" type="submit">Recuperar</a>
+    <a mat-button mat-dialog-close id="boton_1" type="submit">Cancelar</a>
+</div>
+<br>

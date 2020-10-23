@@ -1,0 +1,82 @@
+header{
+    background-color: #0c0c0c;
+}
+
+header nav {
+    background-image: linear-gradient(90deg, #fa0a82 0%, #e90ab1 10%, #a20ae9 20%, #06a3ec 40%, #11e6ca 70%, #c8e90a 100%);
+    width: auto;
+    flex: 1 1 auto;
+    margin: 1;
+    -webkit-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
+  }
+
+  header navbar-brand{
+      color: aliceblue;
+  }
+
+ #homes{
+      color: aliceblue;
+  }
+body{
+    background-image:url("https://www.pulsourbano.com.ar/wp-content/uploads/fotopoligonal.jpg");
+    margin-top: -4.6%;
+    background-size: 1360px 650px;
+}
+body mat-card{
+    text-align: center;
+    margin-left: 33%;
+    margin-right: 33%;
+    -webkit-box-shadow: 2px 3px 5px 0px rgba(27, 19, 19, 0.75);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(29, 26, 26, 0.781);
+    box-shadow: 2px 3px 5px 0px rgba(14, 13, 13, 0.75);
+}
+
+#card{
+    text-align: center;
+    font-family: 'Times New Roman';
+    color: #e78dfd;
+    border-radius: 15px;
+    border: 3px double #e78dfd;
+}
+#card1{
+    text-align: center;
+    background-color: rgb(41, 38, 38);
+    -webkit-box-shadow: 2px 3px 5px 0px rgba(44, 40, 40, 0.75);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(39, 36, 36, 0.75);
+    box-shadow: 2px 3px 5px 0px rgba(17, 17, 17, 0.75);
+}
+
+
+#boxis{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+#boxis example-full-width{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+#boton_1{
+    text-decoration: none;
+    padding: 3px;
+    padding-left: 100px;
+    padding-right: 100px;
+    font-family: 'Times New Roman';
+    font-weight: 700;
+    font-size: 16px;
+    color: #08dddd;
+    border-radius: 15px;
+    border: 3px double #08dddd;
+    -webkit-box-shadow: 2px 3px 5px 0px rgba(193, 240, 241, 0.75);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(112, 253, 253, 0.75);
+    box-shadow: 2px 3px 5px 0px rgba(240, 255, 254, 0.75);
+  }
+  #boton_1:hover{
+    opacity: 0.6;
+    text-decoration: none;
+  }
+  #liking{
+      color: rgb(95, 95, 253);
+  }

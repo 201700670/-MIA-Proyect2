@@ -1,0 +1,154 @@
+
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="#">GTSales Marketplace</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>Home<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+  <a href="crud" class="btn btn-outline-success my-2 my-sm-0" type="submit">LOGIN</a>
+</nav>
+
+</header>
+
+<body background="/proyect2/src/assets/Triangles-combination-geometry-rainbow-colors_3840x2160.jpg">
+    <br>
+    <br>
+    <br>
+    <br>
+    <mat-card >
+        <h1 id="card"><mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon> Información personal</h1>
+    </mat-card>
+    <mat-card id="card1">
+          
+    <mat-grid-list cols="3" rowHeight="280px">
+      <mat-grid-tile>
+        <mat-card id="card2">
+          <input   type="file" class="d-none" (change)="onPhotoSelected($event, $event)" #photoInput>
+          <img id='imgRedonda' [src]="photoSelected || 'assets/no-image.png'" class="img-fluid" alt="No image">
+          <br>
+          <br>
+          <a (click)="photoInput.click()" color="info" id="boton_3" type="submit">Elegir imagen</a>
+          <br>
+          <br>
+          <mat-slide-toggle color="primary"[(ngModel)]="isChecked">¿Desea subir su fotografía?</mat-slide-toggle>
+          </mat-card>
+          <br>
+        
+        
+      </mat-grid-tile>
+      
+    <mat-grid-tile>
+      <br>
+      <br>
+      <mat-list role="list" >
+          <mat-list-item role="listitem"><mat-form-field class="example-full-width" appearance="fill">
+          <mat-label id="espacio">Nombre</mat-label>
+          <input  matInput [(ngModel)]="nombre" name="nombre" placeholder="Ingrese su nombre"[formControl]="firstname" required>
+          <mat-error *ngIf="firstname.invalid">{{getErrorMessageother()}}</mat-error>
+          </mat-form-field>
+          <br><br>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Apellido</mat-label>
+          <input   matInput [(ngModel)]="apellido" name="apellido" placeholder="Ingrese su apellido"[formControl]="lastname" required>
+          <mat-error *ngIf="lastname.invalid">{{getErrorMessageother()}}</mat-error>
+          </mat-form-field>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <mat-form-field appearance="fill">
+          <mat-label>País</mat-label>
+              <select matNativeControl id="pais" name="pais" [(ngModel)]="pais" (onchange)="SelectedPais();"required>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Panamá">Panamá</option>
+                <option value="Honduras">Honduras</option>
+                <option value="El Salvador">El Salvador</option>
+                <option value="Costa Rica">Costa Rica</option>
+                <option value="Belice">Belice</option>
+                <option value="México">México</option>
+                <option value="Nicaragua">Nicaragua</option>
+                <option value="Estados Unidos">Estados Unidos</option>
+                <option value="Canadá">Canadá</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Ecuador">Ecuador</option>
+                <option value="Perú">Perú</option>
+                <option value="Chile">Chile</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Venezuela">Venezuela</option>
+                <option value="Brazil">Brazil</option>
+                <option value="Bolivia">Bolivia</option>
+                <option value="Paraguay">Paraguay</option>
+                <option value="Uruguay">Uruguay</option>
+              </select>
+          </mat-form-field>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile>
+          <mat-list role="list">
+            <mat-list-item role="listitem">
+                <mat-form-field appearance="fill">
+                <mat-label>Fecha de nacimiento</mat-label>
+                <input matInput  [(ngModel)]="fecha" name="fecha" [matDatepicker]="picker" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker [calendarHeaderComponent]="exampleHeader">
+                </mat-datepicker>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+            </mat-list-item>
+            <mat-list-item role="listitem">
+                 <mat-form-field appearance="fill">
+                <mat-label><mat-icon aria-hidden="false" aria-label="Example home icon">alternate_email</mat-icon> Correo electrónico</mat-label>
+                <input matInput [(ngModel)]="correo" name="correo" placeholder="pat@example.com" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+                <!--<mat-form-field class="example-full-width" appearance="fill">
+                <mat-label><mat-icon aria-hidden="false" aria-label="Example home icon">alternate_email</mat-icon> Correo electrónico</mat-label>
+                <input   matInput [(ngModel)]="correo" name="correo" placeholder="ejemplo@email.com">
+                </mat-form-field>-->
+            </mat-list-item>
+            <mat-list-item role="listitem">
+            </mat-list-item>
+            <mat-list-item role="listitem">
+                <mat-form-field  class="example-full-width" appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input matInput #input maxlength="8" [(ngModel)]="contra" name="contra" [type]="hide ? 'password' : 'text'">
+                <mat-hint align="end">{{input.value?.length || 0}}/8</mat-hint>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                </mat-form-field>
+            </mat-list-item>
+          </mat-list>
+    </mat-grid-tile>
+ </mat-grid-list>
+        
+        <br>
+        
+        <!--<a (click)="onUpload($event)" color="info" id="boton_1" type="submit">LOGIN</a>-->
+        <a (click)="ViewUser()" color="info" id="boton_1" type="submit">REGISTRARSE</a>
+        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
+        <mat-form-field  class="example-full-width" appearance="fill">
+        <mat-label>Confirmar contraseña</mat-label>
+        <input matInput #input maxlength="8" [(ngModel)]="password" name="password" [type]="hide1 ? 'password' : 'text'">
+        <mat-hint align="end">{{input.value?.length || 0}}/8</mat-hint>
+        <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        </mat-form-field>
+        
+    </mat-card>
+
+</body>
