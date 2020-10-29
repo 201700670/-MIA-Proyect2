@@ -32,13 +32,23 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema Proyecto2
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS Proyecto2 ;
+CREATE SCHEMA  Proyecto2 ;
 USE Proyecto2 ;
 
 -- -----------------------------------------------------
--- Table Proyecto2.Usuario
+-- Table Tipo
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Proyecto2.Usuario (
+CREATE TABLE  Tipo (
+  idTipo INT NOT NULL,
+  descripcion VARCHAR(1) NOT NULL,
+  PRIMARY KEY (idTipo))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Usuario
+-- -----------------------------------------------------
+CREATE TABLE  Usuario (
   idUsuario INT NOT NULL,
   nombre VARCHAR(50) NOT NULL,
   apellido VARCHAR(50) NOT NULL,
@@ -48,42 +58,21 @@ CREATE TABLE IF NOT EXISTS Proyecto2.Usuario (
   pais VARCHAR(45) NOT NULL,
   foto VARCHAR(100) NOT NULL,
   creditos DECIMAL(10,3) NOT NULL,
-  PRIMARY KEY (idUsuario))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table Proyecto2.Administrador
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Proyecto2.Administrador (
-  idAdministrador INT NOT NULL,
-  PRIMARY KEY (idAdministrador),
-  CONSTRAINT Usuario
-    FOREIGN KEY (idAdministrador)
-    REFERENCES Proyecto2.Usuario (idUsuario)
+  TipoUsuario INT NOT NULL,
+  PRIMARY KEY (idUsuario),
+  INDEX TipoUser_idx (TipoUsuario ASC) VISIBLE,
+  CONSTRAINT TipoUser
+    FOREIGN KEY (TipoUsuario)
+    REFERENCES Tipo (idTipo)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table Proyecto2.Cliente
+-- Table Categoria
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Proyecto2.Cliente (
-  idCliente INT NOT NULL,
-  PRIMARY KEY (idCliente),
-  CONSTRAINT Usuario
-    FOREIGN KEY (idCliente)
-    REFERENCES Proyecto2.Usuario (idUsuario)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table Proyecto2.Categoria
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Proyecto2.Categoria (
+CREATE TABLE  Categoria (
   idCategoria INT NOT NULL,
   nombre VARCHAR(50) NOT NULL,
   PRIMARY KEY (idCategoria))
@@ -91,9 +80,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table Proyecto2.Palabra_clave
+-- Table Palabra_clave
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Proyecto2.Palabra_clave (
+CREATE TABLE  Palabra_clave (
   idPalabra_clave INT NOT NULL,
   nombre VARCHAR(50) NOT NULL,
   PRIMARY KEY (idPalabra_clave))
@@ -101,9 +90,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table Proyecto2.Producto
+-- Table Producto
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Proyecto2.Producto (
+CREATE TABLE  Producto (
   nombre VARCHAR(50) NOT NULL,
   precio DECIMAL(9,2) NOT NULL,
   Detalle_producto VARCHAR(400) NOT NULL,
@@ -115,61 +104,38 @@ CREATE TABLE IF NOT EXISTS Proyecto2.Producto (
   INDEX Claves_idx (palabras_clave ASC) VISIBLE,
   CONSTRAINT Categoria
     FOREIGN KEY (categoria)
-    REFERENCES Proyecto2.Categoria (idCategoria)
+    REFERENCES Categoria (idCategoria)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT Claves
     FOREIGN KEY (palabras_clave)
-    REFERENCES Proyecto2.Palabra_clave (idPalabra_clave)
+    REFERENCES Palabra_clave (idPalabra_clave)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table Proyecto2.Venta
+-- Table Carrito
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Proyecto2.Venta (
-  idVenta INT NOT NULL,
-  idCliente INT NOT NULL,
-  producto VARCHAR(50) NOT NULL,
-  PRIMARY KEY (idVenta),
-  INDEX Cliente_idx (idCliente ASC) VISIBLE,
-  INDEX VentaProducto_idx (producto ASC) VISIBLE,
-  CONSTRAINT Cliente
-    FOREIGN KEY (idCliente)
-    REFERENCES Proyecto2.Cliente (idCliente)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT VentaProducto
-    FOREIGN KEY (producto)
-    REFERENCES Proyecto2.Producto (nombre)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table Proyecto2.Compra
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Proyecto2.Compra (
-  idCompra INT NOT NULL,
+CREATE TABLE  Carrito (
+  idCarrito INT NOT NULL,
   TotalCompra DECIMAL(9,2) NOT NULL,
-  idCliente INT NOT NULL,
-  PRIMARY KEY (idCompra),
-  INDEX Cliente_idx (idCliente ASC) VISIBLE,
-  CONSTRAINT Cliente
-    FOREIGN KEY (idCliente)
-    REFERENCES Proyecto2.Cliente (idCliente)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  usuario INT NOT NULL,
+  PRIMARY KEY (idCarrito),
+  INDEX carrito_idx (usuario ASC) VISIBLE,
+  CONSTRAINT carrito
+    FOREIGN KEY (usuario)
+    REFERENCES Usuario (idUsuario)
+    ON DELETE CASCADE
+    )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table Proyecto2.Detalle_compra
+-- Table Detalle_compra
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Proyecto2.Detalle_compra (
+CREATE TABLE  Detalle_compra (
   idDetalle_compra INT NOT NULL,
   cantidad INT NOT NULL,
   subtotal DECIMAL(9,2) NOT NULL,
@@ -180,65 +146,182 @@ CREATE TABLE IF NOT EXISTS Proyecto2.Detalle_compra (
   INDEX Productoname_idx (producto ASC) VISIBLE,
   CONSTRAINT Compra
     FOREIGN KEY (idCompra)
-    REFERENCES Proyecto2.Compra (idCompra)
+    REFERENCES Carrito (idCarrito)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT Productoname
     FOREIGN KEY (producto)
-    REFERENCES Proyecto2.Producto (nombre)
+    REFERENCES Producto (nombre)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table Proyecto2.Comentario
+-- Table Comentario
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Proyecto2.Comentario (
+CREATE TABLE  Comentario (
   idComentario INT NOT NULL,
   Coment VARCHAR(100) NOT NULL,
   fecha_comentario DATE NOT NULL,
-  idCliente INT NOT NULL,
   producto VARCHAR(50) NOT NULL,
+  usuario INT NOT NULL,
   PRIMARY KEY (idComentario),
-  INDEX Clientecomment_idx (idCliente ASC) VISIBLE,
   INDEX productocomment_idx (producto ASC) VISIBLE,
-  CONSTRAINT Clientecomment
-    FOREIGN KEY (idCliente)
-    REFERENCES Proyecto2.Cliente (idCliente)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+  INDEX comentaryuser_idx (usuario ASC) VISIBLE,
   CONSTRAINT productocomment
     FOREIGN KEY (producto)
-    REFERENCES Proyecto2.Producto (nombre)
+    REFERENCES Producto (nombre)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT comentaryuser
+    FOREIGN KEY (usuario)
+    REFERENCES Usuario (idUsuario)
+    ON DELETE CASCADE
+    )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table Proyecto2.Denuncia
+-- Table Denuncia
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Proyecto2.Denuncia (
+CREATE TABLE  Denuncia (
   idDenuncia INT NOT NULL,
   descripcion VARCHAR(100) NOT NULL,
   estado INT NOT NULL,
   fecha DATE NOT NULL,
-  idCliente INT NOT NULL,
   producto VARCHAR(50) NOT NULL,
+  Usuerdenuncia INT NOT NULL,
   PRIMARY KEY (idDenuncia),
   INDEX pruductdenuncia_idx (producto ASC) VISIBLE,
-  INDEX denunciaclient_idx (idCliente ASC) VISIBLE,
-  CONSTRAINT denunciaclient
-    FOREIGN KEY (idCliente)
-    REFERENCES Proyecto2.Cliente (idCliente)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+  INDEX userdenuncia_idx (Usuerdenuncia ASC) VISIBLE,
   CONSTRAINT pruductdenuncia
     FOREIGN KEY (producto)
-    REFERENCES Proyecto2.Producto (nombre)
+    REFERENCES Producto (nombre)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT userdenuncia
+    FOREIGN KEY (Usuerdenuncia)
+    REFERENCES Usuario (idUsuario)
+    ON DELETE CASCADE
+    )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Chat
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Table Chat
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Chat (
+  idChat INT NOT NULL,
+  Cliente INT NOT NULL,
+  Vendedor INT NOT NULL,
+  producto VARCHAR(50) NOT NULL,
+  PRIMARY KEY (idChat),
+  CONSTRAINT User1
+    FOREIGN KEY (Cliente)
+    REFERENCES Usuario (idUsuario)
+    ON DELETE CASCADE
+  CONSTRAINT User2
+    FOREIGN KEY (Vendedor)
+    REFERENCES Usuario (idUsuario)
+    ON DELETE CASCADE
+    ,
+  CONSTRAINT relacionproducto
+    FOREIGN KEY (producto)
+    REFERENCES Producto (nombre)
+    ON DELETE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Mensaje
+-- -----------------------------------------------------
+CREATE TABLE  Mensaje (
+  idMensaje INT NOT NULL,
+  message VARCHAR(200) NOT NULL,
+  chat INT NOT NULL,
+  PRIMARY KEY (idMensaje),
+  INDEX chatid_idx (chat ASC) VISIBLE,
+  CONSTRAINT chatid
+    FOREIGN KEY (chat)
+    REFERENCES Chat (idChat)
+    ON DELETE CASCADE
+    )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Publicacion
+-- -----------------------------------------------------
+CREATE TABLE  Publicacion (
+  idPublicacion INT NOT NULL,
+  Like INT NOT NULL,
+  visible INT NOT NULL,
+  producto VARCHAR(50) NOT NULL,
+  comentario INT NOT NULL,
+  denuncia INT NOT NULL,
+  PRIMARY KEY (idPublicacion),
+  INDEX comentario_idx (comentario ASC) VISIBLE,
+  INDEX denuncia_idx (denuncia ASC) VISIBLE,
+  CONSTRAINT comentario
+    FOREIGN KEY (comentario)
+    REFERENCES Comentario (idComentario)
+    ON DELETE CASCADE
+    ,
+  CONSTRAINT denuncia
+    FOREIGN KEY (denuncia)
+    REFERENCES Denuncia (idDenuncia)
+    ON DELETE CASCADE
+    ,
+  CONSTRAINT producto
+    FOREIGN KEY (producto)
+    REFERENCES Producto (nombre)
+    ON DELETE CASCADE
+    )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Venta
+-- -----------------------------------------------------
+CREATE TABLE  Venta (
+  idVenta INT NOT NULL,
+  TotalVenta DECIMAL(9,2) NOT NULL,
+  usuario INT NOT NULL,
+  PRIMARY KEY (idVenta),
+  INDEX carrito_idx (usuario ASC) VISIBLE,
+  CONSTRAINT carrito0
+    FOREIGN KEY (usuario)
+    REFERENCES Usuario (idUsuario)
+    ON DELETE CASCADE
+    )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Detalle_Venta
+-- -----------------------------------------------------
+CREATE TABLE  Detalle_Venta (
+  idDetalle_venta INT NOT NULL,
+  subtotal DECIMAL(9,2) NOT NULL,
+  producto VARCHAR(50) NOT NULL,
+  venta INT NOT NULL,
+  PRIMARY KEY (idDetalle_venta),
+  INDEX Productoname_idx (producto ASC) VISIBLE,
+  INDEX ventarefer_idx (venta ASC) VISIBLE,
+  CONSTRAINT productopublic
+    FOREIGN KEY (producto)
+    REFERENCES Producto (nombre)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT ventarefer
+    FOREIGN KEY (venta)
+    REFERENCES Venta (idVenta)
+    ON DELETE CASCADE
+    )
 ENGINE = InnoDB;
 
 

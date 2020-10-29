@@ -3,7 +3,7 @@ header{
 }
 
 header nav {
-    background-image: linear-gradient(90deg, #fa0a82 0%, #e90ab1 10%, #a20ae9 20%, #06a3ec 40%, #11e6ca 70%, #c8e90a 100%);
+    background-image: linear-gradient(90deg, #fad60a 0%, #e9760a 10%, #e90a15 20%, #ec8106 40%, #e6ad11 70%, #c8e90a 100%);
     width: 100%;
     margin: 1;
     -webkit-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
@@ -27,12 +27,12 @@ header nav {
       color: aliceblue;
   }
 body{
-    background-image:url("https://www.pulsourbano.com.ar/wp-content/uploads/fotopoligonal.jpg");
+    background-image:url("https://i.ytimg.com/vi/g_J1dqoXDKI/maxresdefault.jpg");
     margin-top: 0px;
     margin-block-end: -3000px;
     height: 570px;
     width: 100%;
-    background-size: 1360px 650px;
+    background-size: 1370px 800px;
 }
 body mat-card{
     text-align: center;
@@ -43,10 +43,12 @@ body mat-card{
 
 #card{
     text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
     font-family: 'Times New Roman';
-    color: #e78dfd;
+    color: #8dfdd8;
     border-radius: 15px;
-    border: 3px double #e78dfd;
+    border: 3px double #5bf1b3;
 }
 #card1{
     text-align: center;
@@ -74,9 +76,9 @@ body mat-card{
     font-family: 'Times New Roman';
     font-weight: 700;
     font-size: 16px;
-    color: #08dddd;
+    color: #dd0836;
     border-radius: 15px;
-    border: 3px double #08dddd;
+    border: 3px double #dd0836;
     -webkit-box-shadow: 2px 3px 5px 0px rgba(193, 240, 241, 0.75);
     -moz-box-shadow: 2px 3px 5px 0px rgba(112, 253, 253, 0.75);
     box-shadow: 2px 3px 5px 0px rgba(240, 255, 254, 0.75);
@@ -89,8 +91,7 @@ body mat-card{
       color: rgb(95, 95, 253);
   }
   #navegation{
-    background-image: linear-gradient(90deg, #fa0a82 0%, #e90ab1 10%, #a20ae9 20%, #06a3ec 40%, #11e6ca 70%, #c8e90a 100%);
-   
+    background-image: linear-gradient(90deg, #535353 0%, #a5a2a0 40%, #fffefe 50%, #797878 70%, #464646 100%);
     -webkit-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
@@ -104,3 +105,4 @@ body mat-card{
   mat-form-field{
     display: block;
   }
+ 

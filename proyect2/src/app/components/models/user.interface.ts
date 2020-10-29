@@ -7,5 +7,6 @@ export interface UserInterface{
     "fecha_nacimiento":string,
     "pais":string,
     "foto":string,
-    "creditos":number
+    "creditos":number,
+    "tipousuario":number
 }

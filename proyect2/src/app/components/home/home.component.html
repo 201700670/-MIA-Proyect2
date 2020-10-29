@@ -1,11 +1,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <header>
-<div class="topnav" id="myTopnav">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  
-    
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+    <!--<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
       <a class="navbar-brand" href="#">GTSales Marketplace</a>
         <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>Home<span class="sr-only">(current)</span></a>
@@ -13,12 +10,29 @@
       <li class="nav-item active">
       <a href="crud" class="btn btn-outline-success my-2 my-sm-0" type="submit">LOGIN</a>
       </li>
-    </ul>
-  
-  
-</nav>
-</div>
-
+    </ul>-->
+<mat-toolbar fxLayout="row" id="navegation">
+    <span fxFlex>GTSales Marketplace</span>
+    <button mat-button  *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="{{item.ruta}}"><mat-icon aria-hidden="false" aria-label="Example home icon">{{item.icon}}</mat-icon>{{item.label}}</a>
+    </button>
+    <ng-container>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <ng-container *ngFor="let item of menuItems">
+                <div [fxShow]="!item.showOnDesktop" [fxShow.sm]="!item.showOnTablet" [fxShow.xs]="!item.showOnMobile">
+                    <button mat-menu-item >
+                        <a class="nav-link" id="homes "href="{{item.ruta}}"><mat-icon aria-hidden="false" aria-label="Example home icon">{{item.icon}}</mat-icon>{{item.label}}</a>
+                    </button>
+                    <mat-divider></mat-divider>
+                </div>
+            </ng-container>
+        </mat-menu>
+    </ng-container>
+</mat-toolbar>
 </header>
 
 <body class="Body" id="Body">
@@ -30,7 +44,7 @@
       <img [src]="images[0]" alt="Random first slide" class="w-100">
     </div>
     <div class="carousel-caption">
-      <h3> En GTSales Marketplace</h3>
+      <h4><b>En GTSales Marketplace</b></h4>
       <p><b>El futuro es hoy, cuentas con...</b></p>
     </div>
   </ng-template>
@@ -39,7 +53,7 @@
       <img [src]="images[1]" alt="Random second slide" class="w-100">
     </div>
     <div class="carousel-caption">
-      <h3>LA MEJOR TECNOLOGÍA</h3>
+      <h4>LA MEJOR TECNOLOGÍA</h4>
     </div>
   </ng-template>
   <ng-template ngbSlide>
@@ -47,7 +61,7 @@
       <img [src]="images[2]"  alt="Random third slide" class="w-100">
     </div>
     <div class="carousel-caption">
-      <h3 id="h3color"><b>TODO PARA EL HOGAR</b></h3>
+      <h4 id="h3color" ><b>TODO PARA EL HOGAR</b></h4>
     </div>
   </ng-template>
   <ng-template ngbSlide>
@@ -55,8 +69,7 @@
       <img [src]="images[3]" alt="Random fourth slide " class="w-100">
     </div>
     <div class="carousel-caption">
-      <h3 id= "h3color2"><b>A TU COCINA NO LE FALTARÁ NADA</b></h3>
-      <h5 id= "h3color2"><b>Regístrate y comienza la experiencia</b></h5>
+      <h4 id= "h3color2"><b>A TU COCINA NO LE FALTARÁ NADA</b></h4>
     </div>
   </ng-template>
 </ngb-carousel>

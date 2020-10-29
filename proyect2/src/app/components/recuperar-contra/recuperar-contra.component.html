@@ -1,4 +1,3 @@
-
 <header>
 <mat-toolbar fxLayout="row" id="navegation">
     <span fxFlex>GTSales Marketplace</span>
@@ -25,32 +24,31 @@
 </header>
 
 <body>
-    <br>
+    <br><br>
     <div class="content" fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">  
   <div>
     <mat-card id="card1" fxFlex="200%" fxFlex.sm="100%">
     <mat-card width="100%">
-    <h1 id="card"><mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon> Sign in</h1>
+    <h3 id="card"><mat-icon aria-hidden="false" aria-label="Example home icon">lock</mat-icon> Recuperar Contraseña</h3>
     </mat-card>
     <br>
-        <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label><mat-icon aria-hidden="false" aria-label="Example home icon">alternate_email</mat-icon> Enter your Email</mat-label>
-        <input   matInput [(ngModel)]="correo" name="correo" placeholder="ejemplo@email.com">
+         <mat-form-field  class="example-full-width" appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [(ngModel)]="contra1" name="contra1" [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
         </mat-form-field>
         <br>
         <mat-form-field  class="example-full-width" appearance="fill">
-        <mat-label>Enter your password</mat-label>
+        <mat-label>Confirm your password</mat-label>
         <input matInput [(ngModel)]="contra" name="contra" [type]="hide ? 'password' : 'text'">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
         </mat-form-field>
         <br>
-        <a href="registro" class="btn btn-outline-success my-2 my-sm-0" type="submit">REGISTRARSE</a>
-        <a mat-button id="liking" (click)="openDialog()">Forgot password?</a>
-        <br>
-        <br>
-        <a color="info" id="boton_1" type="submit" (click)="LocalStorage()">LOGIN</a>
+        <a color="info" id="boton_1" type="submit" (click)="get()">ENVIAR</a>
         <br>
         <br>
     </mat-card>

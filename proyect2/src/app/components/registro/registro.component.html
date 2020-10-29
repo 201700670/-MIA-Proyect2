@@ -1,33 +1,40 @@
-
 <header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand" href="#">GTSales Marketplace</a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>Home<span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-  </div>
-  <a href="crud" class="btn btn-outline-success my-2 my-sm-0" type="submit">LOGIN</a>
-</nav>
-
+<mat-toolbar fxLayout="row" id="navegation">
+    <span fxFlex>GTSales Marketplace</span>
+    <button mat-button  *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="{{item.ruta}}"><mat-icon aria-hidden="false" aria-label="Example home icon">{{item.icon}}</mat-icon>{{item.label}}</a>
+    </button>
+    <ng-container>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <ng-container *ngFor="let item of menuItems">
+                <div [fxShow]="!item.showOnDesktop" [fxShow.sm]="!item.showOnTablet" [fxShow.xs]="!item.showOnMobile">
+                    <button mat-menu-item >
+                        <a class="nav-link" id="homes "href="{{item.ruta}}"><mat-icon aria-hidden="false" aria-label="Example home icon">{{item.icon}}</mat-icon>{{item.label}}</a>
+                    </button>
+                    <mat-divider></mat-divider>
+                </div>
+            </ng-container>
+        </mat-menu>
+    </ng-container>
+</mat-toolbar>
 </header>
 
 <body background="/proyect2/src/assets/Triangles-combination-geometry-rainbow-colors_3840x2160.jpg">
     <br>
     <br>
     <br>
+    <div class="content" fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">  
+  <div>
+    <mat-card id="card1"  fxFlex.sm="100%">
+          <mat-card >
+            <h1 id="card"><mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon> Información personal</h1>
+        </mat-card>
     <br>
-    <mat-card >
-        <h1 id="card"><mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon> Información personal</h1>
-    </mat-card>
-    <mat-card id="card1">
-          
-    <mat-grid-list cols="3" rowHeight="280px">
+    <mat-grid-list id="gridcolor"cols="3" rowHeight="280px" [cols]="breakpoint" (window:resize)="onResize($event)">
       <mat-grid-tile>
         <mat-card id="card2">
           <input   type="file" class="d-none" (change)="onPhotoSelected($event, $event)" #photoInput>
@@ -37,7 +44,7 @@
           <a (click)="photoInput.click()" color="info" id="boton_3" type="submit">Elegir imagen</a>
           <br>
           <br>
-          <mat-slide-toggle color="primary"[(ngModel)]="isChecked">¿Desea subir su fotografía?</mat-slide-toggle>
+          <mat-slide-toggle color="primary"[(ngModel)]="isChecked">¿Subir fotografía?</mat-slide-toggle>
           </mat-card>
           <br>
         
@@ -114,10 +121,6 @@
                 <input matInput [(ngModel)]="correo" name="correo" placeholder="pat@example.com" [formControl]="email" required>
                 <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
-                <!--<mat-form-field class="example-full-width" appearance="fill">
-                <mat-label><mat-icon aria-hidden="false" aria-label="Example home icon">alternate_email</mat-icon> Correo electrónico</mat-label>
-                <input   matInput [(ngModel)]="correo" name="correo" placeholder="ejemplo@email.com">
-                </mat-form-field>-->
             </mat-list-item>
             <mat-list-item role="listitem">
             </mat-list-item>
@@ -134,12 +137,8 @@
           </mat-list>
     </mat-grid-tile>
  </mat-grid-list>
-        
+
         <br>
-        
-        <!--<a (click)="onUpload($event)" color="info" id="boton_1" type="submit">LOGIN</a>-->
-        <a (click)="ViewUser()" color="info" id="boton_1" type="submit">REGISTRARSE</a>
-        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
         <mat-form-field  class="example-full-width" appearance="fill">
         <mat-label>Confirmar contraseña</mat-label>
         <input matInput #input maxlength="8" [(ngModel)]="password" name="password" [type]="hide1 ? 'password' : 'text'">
@@ -148,7 +147,13 @@
         <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
         </mat-form-field>
+
+        <a (click)="ViewUser()" color="info" id="boton_1" type="submit">REGISTRARSE</a>
+        
+        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
+        
         
     </mat-card>
-
+</div>
+</div>
 </body>

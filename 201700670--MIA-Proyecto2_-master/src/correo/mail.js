@@ -10,8 +10,8 @@ class Mailer{
             ssl: true,
             port : 3000,
             auth: {
-                user: 'miaarchivos2020@gmail.com',
-                pass: 'mia1234@Ab'
+                user: 'andreaylilipalomo@gmail.com',
+                pass: '##9798AyL'
             }
           });
         

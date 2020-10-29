@@ -32,6 +32,11 @@ import { from } from 'rxjs';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
+import { ConfirmarCorreoComponent } from './components/confirmar-correo/confirmar-correo.component';
+import { RecuperarContraComponent } from './components/recuperar-contra/recuperar-contra.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +44,9 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     HomeComponent,
     LoginComponent,
     ForgotemailComponent,
-    RegistroComponent
+    RegistroComponent,
+    ConfirmarCorreoComponent,
+    RecuperarContraComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +73,10 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     MatSlideToggleModule,
     MatCarouselModule.forRoot(),
     CarouselModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatMenuModule
   ],
   exports:[MatDatepickerModule],
   providers: [UploadService],
