@@ -7,6 +7,11 @@ import { HomeComponent } from "./components/home/home.component";
 import { LoginComponent } from "./components/login/login.component";
 import { RegistroComponent } from './components/registro/registro.component';
 import { RecuperarContraComponent } from './components/recuperar-contra/recuperar-contra.component'
+import { PublicacionesComponent } from './components/publicaciones/publicaciones.component';
+import { ProductGuard } from './guard/product.guard';
+import { PerfilClienteComponent } from './components/perfil-cliente/perfil-cliente.component';
+import { SecurityGuard } from './guard/security.guard';
+import { ProductoComponent } from './components/producto/producto.component';
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +35,20 @@ const routes: Routes = [
   }, {
     path: 'recuperarContra/:id',
     component: RecuperarContraComponent
+  },
+  {
+    path: 'Publicacion',
+    component:  PublicacionesComponent,
+  },
+  {
+    path: 'PerfilCliente',
+    component:PerfilClienteComponent,
+    canActivate:[SecurityGuard],
+  },
+  {
+    path: 'ProductoCliente',
+    component:ProductoComponent,
+    canActivate:[ProductGuard],
   }
 ];
 

@@ -65,7 +65,7 @@ export class RegistroComponent implements OnInit {
   fecha: Date
   correo: string = "";
   password: string = "";
-  urlfoto: string = "archivos/no-image.png";
+  urlfoto: string = "assets/no-image.png";
   model: string = ""
   exampleHeader: string = ""
   selectedviewValue: string;
@@ -104,7 +104,9 @@ export class RegistroComponent implements OnInit {
         this.serviceUpload.uploadFile(formData).subscribe((res) => {
           console.log('response received is ', JSON.stringify(res));
           let temporal = JSON.stringify(res).split("\"", 4);
-          this.urlfoto = temporal[3];
+          let temporal2=temporal[3].split("/")
+          this.urlfoto = temporal2[4]+"/"+temporal2[5];
+          //../../proyect2/src/assets/TypNDKHMkv1k8kruQK0Bcz1R.png
         });
       }
 
@@ -128,7 +130,7 @@ export class RegistroComponent implements OnInit {
               this.pais = "";
               this.fecha = null;
               this.password = "";
-              this.urlfoto = "archivos/no-image.png";
+              this.urlfoto = "assets/no-image.png";
               this.model = ""
               this.exampleHeader = ""
               this.selectedviewValue = "";
@@ -148,7 +150,6 @@ export class RegistroComponent implements OnInit {
         })
         ////confirmacion de registro por correo electronico
 
-        
         
       } else {
         alert("Uno de los campos no se ha llenado")

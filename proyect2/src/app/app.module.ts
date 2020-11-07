@@ -37,6 +37,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import { ConfirmarCorreoComponent } from './components/confirmar-correo/confirmar-correo.component';
 import { RecuperarContraComponent } from './components/recuperar-contra/recuperar-contra.component';
+import { PublicacionesComponent } from './components/publicaciones/publicaciones.component';
+import { PerfilClienteComponent } from './components/perfil-cliente/perfil-cliente.component';
+import { ProductoComponent } from './components/producto/producto.component';
+import { AgregarComponent } from './components/producto/crud-producto/agregar/agregar.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +53,11 @@ import { RecuperarContraComponent } from './components/recuperar-contra/recupera
     ForgotemailComponent,
     RegistroComponent,
     ConfirmarCorreoComponent,
-    RecuperarContraComponent
+    RecuperarContraComponent,
+    PublicacionesComponent,
+    PerfilClienteComponent,
+    ProductoComponent,
+    AgregarComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +87,10 @@ import { RecuperarContraComponent } from './components/recuperar-contra/recupera
     FlexLayoutModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    ScrollingModule
   ],
   exports:[MatDatepickerModule],
   providers: [UploadService],

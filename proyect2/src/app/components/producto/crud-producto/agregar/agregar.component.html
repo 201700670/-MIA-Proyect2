@@ -1,0 +1,74 @@
+<h1 mat-dialog-title>INGRESA TUS PRODUCTOS</h1>
+<div mat-dialog-content>
+
+<div class="content" fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">
+    <mat-card id="card2">
+          <input   type="file" class="d-none" (change)="onPhotoSelected($event, $event)" #photoInput>
+          <img id='imgRedonda' [src]="photoSelected || 'assets/newproducto.png'" class="img-fluid" alt="No image">
+          <br>
+          <br>
+          <a (click)="photoInput.click()" color="info" id="boton_3" type="submit">Elegir imagen</a>
+          <br>
+          <br>
+          <mat-slide-toggle color="primary"[(ngModel)]="isChecked">¿Subir fotografía?</mat-slide-toggle>
+    </mat-card>
+    
+    <mat-form-field id="escape" class="example-full-width" appearance="fill" >
+        <mat-label><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_basket</mat-icon> Nombre del producto</mat-label>
+        <input   matInput [(ngModel)]="nombre" name="nombre" placeholder="Celular LG" required>
+    </mat-form-field>
+    <mat-form-field id="textarea" class="example-full-width" [style.width.px]=210>
+        <mat-label>Agregar descripción</mat-label>
+        <textarea  matInput [(ngModel)]="descripcion" name="descripcion" placeholder="Ex. Este producto es de material durable" required></textarea>
+    </mat-form-field>
+    </div>
+    <br>
+
+<mat-form-field id="space2"appearance="fill">
+  <mat-label>Categoría</mat-label>
+  <mat-select name="categoria" [(ngModel)]="categoria" required>
+    <mat-option *ngFor="let food of foods" [value]="food.value">
+      {{food.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field id="escape" class="example-chip-list" [style.width.px]=210>
+  <mat-chip-list #chipList aria-label="Fruit selection">
+    <mat-chip
+      *ngFor="let fruit of fruits"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(fruit)">
+      {{fruit}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input
+      placeholder="Palabras claves... Ingresa o elige la palabra "
+      #fruitInput
+      [formControl]="fruitCtrl"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+      {{fruit}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+<br>
+<mat-form-field appearance="fill" >
+    <mat-label>Precio</mat-label>
+    <input matInput name="precio" [(ngModel)]="precio" type="number" class="example-right-align" required>
+    <span matPrefix>Q&nbsp;</span>
+    <span matSuffix>.00</span>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">
+    <a mat-button id="boton_1" type="submit" (click)="Result()">Recuperar</a>
+    <a mat-button mat-dialog-close id="boton_1" type="submit">Cancelar</a>
+</div>
+
+<br>

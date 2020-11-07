@@ -76,13 +76,110 @@ export class UploadService {
       , { headers: this.headers })
       .pipe(map(data => data));
   }
-  Loginin(username,pass)
-  {
-    const url="http://192.168.1.15:3000/login";
+  Loginin(username, pass) {
+    const url = "http://192.168.1.15:3000/login";
     return this.http.post(url,
       {
         "correo_electronico": username,
-        "contrasena":pass
+        "contrasena": pass
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  Modify(Nombre: string, Apellido: string, Pais: string, Correo: string, Fecha: string, Password: string, urlfoto: string) {
+    const url = 'http://192.168.1.15:3000/modifyUser';
+    console.log(Nombre, Apellido, Correo)
+    return this.http.put(url,
+      {
+        "nombre": Nombre,
+        "apellido": Apellido,
+        "correo_electronico": Correo,
+        "contrasena": Password,
+        "fecha_nacimiento": Fecha,
+        "pais": Pais,
+        "foto": urlfoto
+      },
+      { headers: this.headers }
+    ).pipe(map(data => data));
+  }
+  darBaja(id) {
+
+    const url = "http://192.168.1.15:3000/user/baja";
+    return this.http.put(url,
+      {
+        "id": id
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  AddPalabraClave(nombre, producto) {
+
+    const url = "http://192.168.1.15:3000/addpalabraclave";
+    return this.http.post(url,
+      {
+        "nombre": nombre,
+        "producto": producto
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  ListPalabraClave(){
+    const url = "http://192.168.1.15:3000/Listpalabraclave";
+    return this.http.get(url);
+  }
+  ListCategoria(){
+    const url = "http://192.168.1.15:3000/ListCategoria";
+    return this.http.get(url);
+  }
+  AddProducto(nombre:string,precio:number, foto:string, descripcion:string, estado:number, categoria:string){
+    const url = "http://192.168.1.15:3000/addProducto";
+    return this.http.post(url,
+      {
+        "nombre": nombre,
+        "precio": precio,
+        "foto": foto,
+        "detalle_producto": descripcion,
+        "estado": estado,
+        "categoria": categoria
+      },
+      { headers: this.headers }
+    ).pipe(map(data => data));
+  } 
+  getidProducto(nombre, precio){
+    const url = "http://192.168.1.15:3000/getidProducto";
+    return this.http.post(url,
+      {
+        "nombre": nombre,
+        "precio": precio
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  addVenta(idusuario){
+    const url = "http://192.168.1.15:3000/addVenta";
+    return this.http.post(url,
+      {
+        "usuario": idusuario
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  getidVenta(idusuario){
+    const url = "http://192.168.1.15:3000/getidVenta";
+    return this.http.post(url,
+      {
+        "usuario": idusuario
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  Detalle_Venta(subtotal:number,producto:number, idVenta:number){
+    const url = "http://192.168.1.15:3000/addDetalleVenta";
+    return this.http.post(url,
+      {
+        "subtotal": subtotal,
+        "producto": producto,
+        "venta": idVenta
       }
       , { headers: this.headers })
       .pipe(map(data => data));
@@ -105,6 +202,7 @@ export class UploadService {
 
     }
   }
+
   ////////////////////////////////////////////////////////////////////////////////
 
 }

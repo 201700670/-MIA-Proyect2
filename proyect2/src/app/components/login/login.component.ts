@@ -40,11 +40,7 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-  LocalStorage() {
-    let data: Perfil = { id: 12 };
-    this.Userservices.setUser(data);
-  }
-  login() {
+  Login() {
     this.Userservices.Loginin(this.correo, this.contra).subscribe((res) => {
       //console.log(res);
       if (res['msg']) {
@@ -55,8 +51,8 @@ export class LoginComponent implements OnInit {
 
 
         this.Userservices.setUser(DataUser);
-        if (DataUser.tipousuario == 3) { this.route.navigate(['Producto']); }
-        else if (DataUser.tipousuario == 2) {
+        if (DataUser.tipousuario == 2) { this.route.navigate(['PerfilCliente']); }
+        else if (DataUser.tipousuario == 3) {
           alert("Pagina del servicio de ayuda en mantenimiento :(");
           localStorage.removeItem("usuarioLogeado");
           this.route.navigate(['login']);

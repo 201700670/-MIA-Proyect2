@@ -1,0 +1,140 @@
+
+<header>
+<mat-toolbar fxLayout="row" id="navegation">
+    <span fxFlex>GTSales Marketplace</span>
+    <button mat-button>
+        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">store</mat-icon>Inicio</a>
+    </button>
+    <button mat-button  *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+    </button>
+    <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">power_settings_new</mat-icon>Cerrar Sesion</a>
+    </button>
+    <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
+    </button>
+    <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="ProductoCliente"><mat-icon aria-hidden="false" aria-label="Example home icon">loyalty</mat-icon>Mis productos</a>
+    </button>
+    <ng-container>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>dehaze</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <ng-container *ngFor="let item of menuItems">
+                <div [fxShow]="!item.showOnDesktop" [fxShow.sm]="!item.showOnTablet" [fxShow.xs]="!item.showOnMobile">
+                    <button mat-menu-item >
+                        <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                    </button>
+                </div>
+                <button mat-menu-item  [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
+                    [fxShow.sm]="!item.showOnTablet">
+                        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">power_settings_new</mat-icon>Cerrar Sesion</a>
+                </button>
+                <button mat-menu-item  [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
+                    [fxShow.sm]="!item.showOnTablet">
+                        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
+                </button>
+                <button mat-menu-item  [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
+                    [fxShow.sm]="!item.showOnTablet">
+                        <a class="nav-link" id="homes "href="ProductoCliente"><mat-icon aria-hidden="false" aria-label="Example home icon">loyalty</mat-icon>Mis productos</a>
+                </button>
+            </ng-container>
+        </mat-menu>
+    </ng-container>
+</mat-toolbar>
+</header>
+<body>
+    <br>
+    
+    <div class="content" fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">  
+    
+  <div>
+  <a id="card" color="info" id="boton_1" type="submit"  (click)="agregarProducto()" ><mat-icon aria-hidden="false" aria-label="Example home icon">playlist_add</mat-icon>  AGREGA TUS PRODUCTOS</a>
+    <br>
+    <br>
+    <mat-card id="card1" fxShow.xs="100%" fxFlex.sm="99%">
+    <h1 fxFlex.sm="100%"id="card"> <mat-icon aria-hidden="false" > shopping_basket</mat-icon> Tus Productos Subidos</h1>
+        <mat-grid-list id="gridcolor"cols="2" rowHeight="180px" [cols]="breakpoint" (window:resize)="onResize($event)">
+            <mat-grid-tile >
+                <ng-container *ngFor="let item of menuItems">
+                    <mat-card >
+                    <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                    <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
+             </mat-card>
+                </ng-container>
+            </mat-grid-tile>
+            <mat-grid-tile >
+                <ng-container *ngFor="let item of menuItems">
+                     <mat-card >
+                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
+            </mat-card>
+                </ng-container>
+            </mat-grid-tile>
+            <mat-grid-tile >
+                <ng-container *ngFor="let item of menuItems">
+                     <mat-card >
+                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
+            </mat-card>
+                </ng-container>
+            </mat-grid-tile>
+            <mat-grid-tile >
+                <ng-container *ngFor="let item of menuItems">
+                     <mat-card >
+                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
+            </mat-card>
+                </ng-container>
+            </mat-grid-tile>
+            <mat-grid-tile >
+                <ng-container *ngFor="let item of menuItems">
+                     <mat-card >
+                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
+            </mat-card>
+                </ng-container>
+            </mat-grid-tile>
+            <mat-grid-tile >
+                <ng-container *ngFor="let item of menuItems">
+                     <mat-card >
+                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
+            </mat-card>
+                </ng-container>
+            </mat-grid-tile>
+            <mat-grid-tile >
+                <ng-container *ngFor="let item of menuItems">
+                     <mat-card >
+                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
+            </mat-card>
+                </ng-container>
+            </mat-grid-tile>
+            <mat-grid-tile >
+                <ng-container *ngFor="let item of menuItems">
+                     <mat-card >
+                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
+            </mat-card>
+                </ng-container>
+            </mat-grid-tile>
+            <mat-grid-tile >
+                <ng-container *ngFor="let item of menuItems">
+                     <mat-card >
+                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
+            </mat-card>
+                </ng-container>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </mat-card>
+</div>
+</div>
+</body>
