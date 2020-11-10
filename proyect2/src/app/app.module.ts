@@ -44,6 +44,8 @@ import { AgregarComponent } from './components/producto/crud-producto/agregar/ag
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { DescripcionComponent } from './components/producto/crud-producto/descripbreve/descripcion/descripcion.component';
+import { ModificarproductoComponent } from './components/producto/crud-producto/modificar/modificarproducto/modificarproducto.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +59,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     PublicacionesComponent,
     PerfilClienteComponent,
     ProductoComponent,
-    AgregarComponent
+    AgregarComponent,
+    DescripcionComponent,
+    ModificarproductoComponent
   ],
   imports: [
     BrowserModule,

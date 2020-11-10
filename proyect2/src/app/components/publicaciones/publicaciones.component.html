@@ -1,1 +1,125 @@
-<p>publicaciones works!</p>
+
+<header>
+<mat-toolbar fxLayout="row" id="navegation">
+    <span fxFlex>GTSales Marketplace</span>
+    <button mat-button>
+        <a class="nav-link" id="homes "href="Publicacion"><mat-icon aria-hidden="false" aria-label="Example home icon">store</mat-icon>Inicio</a>
+    </button>
+    <button mat-button  *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+    </button>
+    <button mat-button (click)="cerrarSesion()" *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">power_settings_new</mat-icon>Cerrar Sesion</a>
+    </button>
+    <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
+    </button>
+    <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="ProductoCliente"><mat-icon aria-hidden="false" aria-label="Example home icon">loyalty</mat-icon>Mis productos</a>
+    </button>
+    <ng-container>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>dehaze</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <ng-container *ngFor="let item of menuItems">
+                <div [fxShow]="!item.showOnDesktop" [fxShow.sm]="!item.showOnTablet" [fxShow.xs]="!item.showOnMobile">
+                    <button mat-menu-item >
+                        <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                    </button>
+                </div>
+                <button mat-menu-item  (click)="cerrarSesion()" [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
+                    [fxShow.sm]="!item.showOnTablet">
+                        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">power_settings_new</mat-icon>Cerrar Sesion</a>
+                </button>
+                <button mat-menu-item  [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
+                    [fxShow.sm]="!item.showOnTablet">
+                        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
+                </button>
+                <button mat-menu-item  [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
+                    [fxShow.sm]="!item.showOnTablet">
+                        <a class="nav-link" id="homes "href="ProductoCliente"><mat-icon aria-hidden="false" aria-label="Example home icon">loyalty</mat-icon>Mis productos</a>
+                </button>
+            </ng-container>
+        </mat-menu>
+    </ng-container>
+</mat-toolbar>
+</header>
+<body>
+        
+            <div id="precio">
+            <a>Precio:</a><br>
+            <a (click)="ascendente()"color="info" id="boton_1" type="submit"><mat-icon aria-hidden="false" aria-label="Example home icon">arrow_upward</mat-icon></a>
+            <a (click)="descendente()"color="info" id="boton_1" type="submit"><mat-icon aria-hidden="false" aria-label="Example home icon">arrow_downward</mat-icon></a>
+            </div>
+        <div id="principal"fxLayoutAlign="space-around center">
+            <mat-form-field id="space2"appearance="fill">
+                <mat-label>Categoría</mat-label>
+                <mat-select name="categoria" [(ngModel)]="categoria" >
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                    {{food.viewValue}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <a (click)="CategoriaProducto()" id="boton_3" type="submit"><mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon></a>
+        </div>
+        <div id="principal2"fxLayoutAlign="space-around center">
+            <mat-form-field id="escape" class="example-chip-list" [style.width.px]=410>
+             <mat-chip-list #chipList aria-label="Fruit selection">
+                <mat-chip
+                    *ngFor="let fruit of fruits"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(fruit)">
+                    {{fruit}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                    <input
+                    placeholder="Ingresa o elige la palabra a buscar "
+                    #fruitInput
+                    [formControl]="fruitCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                        {{fruit}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <a (click)="PalabrasClaveMostrar()" id="searchbutton" type="submit"><mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon></a>
+        </div>
+    <div class="content" fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">  
+            
+  <div>
+            
+    <mat-card id="card1" fxShow.xs="100%" fxFlex.sm="100%">
+    
+        <mat-grid-list id="gridcolor"cols="2" rowHeight="400px" [cols]="breakpoint" (window:resize)="onResize($event)">
+            
+            <mat-grid-tile *ngFor="let product of allProduct;let i=index;">
+                     <mat-card id="card3">
+                     <img id='imgRedonda2' src=" {{product.foto}}" class="img-fluid" alt="No image">
+                     <br>
+                     <div id="tam">
+                        {{product.nombre}}<br>
+                        Precio: Q{{product.precio}}<br>
+                     </div>
+                        <a (click)="descripcionProducto(i)"color="info" id="boton_2" type="submit">DESCRIPCION</a>
+                        <a (click)="modificarProducto(i)" color="info" id="boton_2" type="submit">MODIFICAR</a>
+                        <a (click)="eliminarProducto(i)" color="info" id="boton_2" type="submit">ELIMINAR</a>
+                    </mat-card>
+            </mat-grid-tile>
+            
+        </mat-grid-list>
+        <br><br><br>
+    </mat-card>
+</div>
+</div>
+</body>

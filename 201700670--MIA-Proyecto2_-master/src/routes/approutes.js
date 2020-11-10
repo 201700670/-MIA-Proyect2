@@ -186,7 +186,7 @@ approut.put('/modifyUser', async (req, res) => {
             fecha_nacimiento=TO_DATE(:fecha_nacimiento, 'yyyy/mm/dd'),pais=:pais,foto=:foto where correo_electronico=:correo_electronico";
         let result = await BD.Open(sql, [nombre, apellido, contrasena, fecha_nacimiento, pais, foto, correo_electronico], true);
     }
-
+    console.log(nombre,apellido,correo_electronico,contrasena,fecha_nacimiento, pais)
     res.status(200).json({
         "nombre": nombre,
         "apellido": apellido,
@@ -222,6 +222,13 @@ approut.post("/addpalabraclave", async (req, res) => {
 approut.get("/Listpalabraclave", async (req, res) => {
     sql = "select nombre from palabra_clave";
     let result = await BD.Open(sql, [], false);
+    console.log(result);
+    res.status(200).send(result.rows);
+})
+approut.post("/modifypalabraclave", async (req, res) => {
+    const { idproducto } = req.body;
+    sql = "select nombre from palabra_clave where producto=:idproducto";
+    let result = await BD.Open(sql, [idproducto], false);
     console.log(result);
     res.status(200).send(result.rows);
 })
@@ -286,5 +293,154 @@ approut.post('/getidProducto', async (req, res) => {
         ({
             id: result.rows[0][0]
         })
+});
+approut.post('/mostrarProducto', async (req, res) => {
+    const { usuario } = req.body;
+    console.log(usuario);
+    sql = 'select producto.idproducto, producto.nombre, producto.precio, producto.foto, producto.detalle_producto,\
+    producto.estado, producto.categoria from producto \
+    inner join  detalle_venta on detalle_venta.producto=producto.idproducto\
+    inner join  venta on venta.idventa= detalle_venta.venta\
+    where venta.usuario=:usuario and producto.estado=1';
+    let result = await BD.Open(sql, [usuario], true);
+    Producto = []
+    result.rows.map(producto => {
+        let productoSchema = {
+            "id": producto[0],
+            "nombre": producto[1],
+            "precio": producto[2],
+            "foto": producto[3],
+            "detalle_producto": producto[4],
+            "estado": producto[5],
+            "categoria": producto[6]
+        }
+
+        Producto.push(productoSchema);
+    });
+    res.status(200).json(Producto);
+});
+
+approut.post("/modifyProduct", async (req, res) => {
+
+    const { nombre, precio, foto, detalle_producto,categoria, id} = req.body;
+
+    sql = "update producto set  nombre=:nombre, precio=:precio, foto=:foto,\
+    detalle_producto=:detalle_producto, categoria=:categoria where idproducto=:id";
+    await BD.Open(sql, [nombre, precio, foto, detalle_producto,categoria, id], true);
+    res.status(200).send({
+        "msg": "Su producto ha sido modificado correctamente!!",
+    })
+
+})
+approut.put("/deleteProduct", async (req, res) => {
+    const { idproducto } = req.body;
+    sql = "update producto set estado=0 where idproducto=:idproducto";
+    await BD.Open(sql, [idproducto], true);
+    res.status(200).send({
+        "msg": "Producto eliminado correctamente!",
+    })
+
+})
+approut.post('/mostrarPublicacion', async (req, res) => {
+    const { usuario } = req.body;
+    console.log(usuario);
+    sql = 'select producto.idproducto, producto.nombre, producto.precio, producto.foto, producto.detalle_producto,\
+    producto.estado, producto.categoria from producto \
+    inner join  detalle_venta on detalle_venta.producto=producto.idproducto\
+    inner join  venta on venta.idventa= detalle_venta.venta\
+    where venta.usuario!=:usuario and producto.estado=1';
+    let result = await BD.Open(sql, [usuario], true);
+    Producto = []
+    result.rows.map(producto => {
+        let productoSchema = {
+            "id": producto[0],
+            "nombre": producto[1],
+            "precio": producto[2],
+            "foto": producto[3],
+            "detalle_producto": producto[4],
+            "estado": producto[5],
+            "categoria": producto[6]
+        }
+
+        Producto.push(productoSchema);
+    });
+    res.status(200).json(Producto);
+});
+approut.post('/ascendentePublicacion', async (req, res) => {
+    const { usuario } = req.body;
+    console.log(usuario);
+    sql = 'select producto.idproducto, producto.nombre, producto.precio, producto.foto, producto.detalle_producto,\
+    producto.estado, producto.categoria from producto \
+    inner join  detalle_venta on detalle_venta.producto=producto.idproducto\
+    inner join  venta on venta.idventa= detalle_venta.venta\
+    where venta.usuario!=:usuario and producto.estado=1 \
+    ORDER BY producto.precio ASC';
+    let result = await BD.Open(sql, [usuario], true);
+    Producto = []
+    result.rows.map(producto => {
+        let productoSchema = {
+            "id": producto[0],
+            "nombre": producto[1],
+            "precio": producto[2],
+            "foto": producto[3],
+            "detalle_producto": producto[4],
+            "estado": producto[5],
+            "categoria": producto[6]
+        }
+
+        Producto.push(productoSchema);
+    });
+    res.status(200).json(Producto);
+});
+approut.post('/descendentePublicacion', async (req, res) => {
+    const { usuario } = req.body;
+    console.log(usuario);
+    sql = 'select producto.idproducto, producto.nombre, producto.precio, producto.foto, producto.detalle_producto,\
+    producto.estado, producto.categoria from producto \
+    inner join  detalle_venta on detalle_venta.producto=producto.idproducto\
+    inner join  venta on venta.idventa= detalle_venta.venta\
+    where venta.usuario!=:usuario and producto.estado=1 \
+    ORDER BY producto.precio DESC';
+    let result = await BD.Open(sql, [usuario], true);
+    Producto = []
+    result.rows.map(producto => {
+        let productoSchema = {
+            "id": producto[0],
+            "nombre": producto[1],
+            "precio": producto[2],
+            "foto": producto[3],
+            "detalle_producto": producto[4],
+            "estado": producto[5],
+            "categoria": producto[6]
+        }
+
+        Producto.push(productoSchema);
+    });
+    res.status(200).json(Producto);
+});
+approut.post('/CategoriaPublicacion', async (req, res) => {
+    const { usuario, categoria } = req.body;
+    console.log(usuario, categoria);
+    sql = 'select producto.idproducto, producto.nombre, producto.precio, producto.foto, producto.detalle_producto,\
+    producto.estado, producto.categoria from producto \
+    inner join  detalle_venta on detalle_venta.producto=producto.idproducto\
+    inner join  venta on venta.idventa= detalle_venta.venta\
+    where venta.usuario!=:usuario and producto.estado=1 and producto.categoria=:categoria';
+    let result = await BD.Open(sql, [usuario,categoria], true);
+    Producto = []
+    result.rows.map(producto => {
+        let productoSchema = {
+            "id": producto[0],
+            "nombre": producto[1],
+            "precio": producto[2],
+            "foto": producto[3],
+            "detalle_producto": producto[4],
+            "estado": producto[5],
+            "categoria": producto[6]
+        }
+
+        Producto.push(productoSchema);
+    });
+    res.status(200).json(Producto);
 });
 module.exports = approut;

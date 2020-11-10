@@ -1,9 +1,11 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Perfil } from 'src/app/components/models/perfil';
@@ -14,21 +16,21 @@ interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
 }
 @Component({
-  selector: 'app-agregar',
-  templateUrl: './agregar.component.html',
-  styleUrls: ['./agregar.component.css']
+  selector: 'app-modificarproducto',
+  templateUrl: './modificarproducto.component.html',
+  styleUrls: ['./modificarproducto.component.css']
 })
-export class AgregarComponent implements OnInit {
+export class ModificarproductoComponent implements OnInit {
   Usuario: Perfil = this.userService.getUser();
-  nombre: string = ""
-  descripcion: string = ""
+  nombre: string;
+  descripcion: string;
   photoSelected: string | ArrayBuffer;
   isChecked = false;
   uploadedFiles: Array<File>;
   file: File;
-  categoria: string = "";
-  urlfoto: string = "assets/newproducto.png";
-  precio: number = 0;
+  categoria: string;
+  urlfoto: string;
+  precio: number;
   venta: Venta;
   product: Producto;
   ////ESTE ME SIRVE PARA LAS PALABRAS CLAVES/////
@@ -38,7 +40,7 @@ export class AgregarComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   fruitCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
-  fruits: string[] = ['Celulares'];
+  fruits: string[] = [];
   allFruits: string[] = [];
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
@@ -48,7 +50,8 @@ export class AgregarComponent implements OnInit {
   foods: Categoria[] = [];
   ////////////////////////////////////////////
 
-  constructor(private http: HttpClient, private userService: UploadService) {
+  constructor(public dialogRef: MatDialogRef<ModificarproductoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Producto, private userService: UploadService, private route: Router, public dialog: MatDialog) {
 
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
@@ -70,6 +73,15 @@ export class AgregarComponent implements OnInit {
         const element = res[index];
         this.foods.push({ value: element[0], viewValue: element[0] },)
       }
+    })
+    this.urlfoto = this.data.foto
+    this.photoSelected = this.data.foto
+    this.nombre = this.data.nombre
+    this.descripcion = this.data.detalle_producto
+    this.precio = this.data.precio
+    this.categoria = this.data.categoria
+    this.userService.ListPalabraClavemodify(this.data.id).subscribe((res: string[]) => {
+      this.fruits = res
     })
   }
   onPhotoSelected(event: HtmlInputEvent, e: any): void {
@@ -131,6 +143,7 @@ export class AgregarComponent implements OnInit {
   Result() {
 
     if (this.isChecked && this.uploadedFiles != null) {
+      /////////ESTE ES PARA SUBIR IMAGEN 
       let formData = new FormData();
       for (let i = 0; i < this.uploadedFiles.length; i++) {
         formData.append("uploads[]", this.uploadedFiles[i], this.uploadedFiles[i].name);
@@ -141,68 +154,40 @@ export class AgregarComponent implements OnInit {
         let temporal2 = temporal[3].split("/")
         this.urlfoto = temporal2[4] + "/" + temporal2[5];
         if (this.nombre != "" && this.descripcion != "" && this.urlfoto != "" && this.fruits != null) {
-          console.log(this.urlfoto)
-          this.userService.addVenta(this.Usuario.id).subscribe((res) => {
+          this.userService.modificarProducto(this.nombre, this.precio, this.urlfoto, this.descripcion, this.categoria, this.data.id)
+            .subscribe((res) => {
 
-          })
-          this.userService.getidVenta(this.Usuario.id).subscribe((res: Venta) => {
-            this.venta = res
-
-            let idproducto;
-            this.userService.AddProducto(this.nombre, this.precio, this.urlfoto, this.descripcion, 1, this.categoria).subscribe((res: Producto) => {
-              this.product = res;
-              this.userService.getidProducto(this.product.nombre, this.precio).subscribe((res: Venta) => {
-                idproducto = res.id
-                //alert(idproducto)
-                for (let index = 0; index < this.fruits.length; index++) {
-                  const palabra = this.fruits[index];
-                  console.log(palabra)
-                  this.userService.AddPalabraClave(palabra, idproducto).subscribe((res) => {
-                  });
-                }
-                this.userService.Detalle_Venta(this.precio, idproducto, this.venta.id).subscribe((res) => {
-                  alert("Producto Registrado correctamente!")
-                })
-              });
-
-
+              for (let index = 0; index < this.fruits.length; index++) {
+                const palabra = this.fruits[index];
+                console.log(palabra)
+                this.userService.AddPalabraClave(palabra, this.data.id).subscribe((res) => {
+                });
+              }
+              alert(res['msg'])
+              this.route.navigate(["ProductoCliente"]);
+              this.dialog.closeAll();
             })
-
-          })
         } else {
           alert("Llenar todos los campos")
         }
       });
     } else {
       if (this.nombre != "" && this.descripcion != "" && this.urlfoto != "" && this.fruits != null) {
-        //alert(this.urlfoto)
-        this.userService.addVenta(this.Usuario.id).subscribe((res) => {
+        ////////ESTE NO SUBE IMAGEN SOLO MODIFICA LOS DATOS
+        this.userService.modificarProducto(this.nombre, this.precio, this.urlfoto, this.descripcion, this.categoria, this.data.id)
+          .subscribe((res) => {
 
-        })
-        this.userService.getidVenta(this.Usuario.id).subscribe((res: Venta) => {
-          this.venta = res
+            for (let index = 0; index < this.fruits.length; index++) {
+              const palabra = this.fruits[index];
+              this.userService.AddPalabraClave(palabra, this.data.id).subscribe((res) => {
+              });
+            }
 
-          let idproducto;
-          this.userService.AddProducto(this.nombre, this.precio, this.urlfoto, this.descripcion, 1, this.categoria).subscribe((res: Producto) => {
-            this.product = res;
-            this.userService.getidProducto(this.product.nombre, this.precio).subscribe((res: Venta) => {
-              idproducto = res.id
-              console.log(idproducto)
-              for (let index = 0; index < this.fruits.length; index++) {
-                const palabra = this.fruits[index];
-                console.log(palabra)
-                this.userService.AddPalabraClave(palabra, idproducto).subscribe((res) => {
-                });
-              }
-              this.userService.Detalle_Venta(this.precio, idproducto, this.venta.id).subscribe((res) => {
-                alert("Producto Registrado correctamente!")
-              })
-            });
-
-
+            alert(res['msg'])
+            
           })
-
-        })
+        this.dialog.closeAll();
+        location.reload();
       } else {
         alert("Llenar todos los campos")
       }

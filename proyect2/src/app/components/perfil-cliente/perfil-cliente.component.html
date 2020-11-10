@@ -3,13 +3,13 @@
 <mat-toolbar fxLayout="row" id="navegation">
     <span fxFlex>GTSales Marketplace</span>
     <button mat-button>
-        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">store</mat-icon>Inicio</a>
+        <a class="nav-link" id="homes "href="Publicacion"><mat-icon aria-hidden="false" aria-label="Example home icon">store</mat-icon>Inicio</a>
     </button>
     <button mat-button  *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
         [fxShow.sm]="item.showOnTablet">
         <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
     </button>
-    <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+    <button mat-button (click)="cerrarSesion()" *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
         [fxShow.sm]="item.showOnTablet">
         <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">power_settings_new</mat-icon>Cerrar Sesion</a>
     </button>
@@ -32,7 +32,7 @@
                         <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
                     </button>
                 </div>
-                <button mat-menu-item  [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
+                <button mat-menu-item (click)="cerrarSesion()" [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
                     [fxShow.sm]="!item.showOnTablet">
                         <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">power_settings_new</mat-icon>Cerrar Sesion</a>
                 </button>

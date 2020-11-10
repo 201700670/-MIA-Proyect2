@@ -114,6 +114,7 @@ export class PerfilClienteComponent implements OnInit {
   crear_user(User: Perfil) {
     return User;
   }
+ 
   guardarCambios() {
     if (this.isChecked2) {
       //////ESTE ES PARA HACERLO CAMBIANDO CONTRASE;AS*/////////////////////////////////////
@@ -138,10 +139,15 @@ export class PerfilClienteComponent implements OnInit {
             this.menuItems[0].foto = this.urlfoto
             this.Usuario.foto = this.urlfoto
             //../../proyect2/src/assets/TypNDKHMkv1k8kruQK0Bcz1R.png
-            alert("CON IMAGEN " + this.urlfoto)
             let date = this.fecha.getFullYear() + "/" + (this.fecha.getMonth() + 1) + '/' + this.fecha.getDate();
+            this.Usuario.nombre = this.nombre
+            this.Usuario.apellido = this.apellido
+            this.Usuario.fecha_nacimiento = date
+            this.Usuario.pais = this.pais
+            this.Usuario.foto = this.urlfoto
             this.serviceUpload.Modify(this.nombre, this.apellido, this.pais, this.correo, date, this.contra, temporal2[4] + "/" + temporal2[5])
               .subscribe((res: Perfil) => {
+                alert(res);
                 this.User = res;
                 this.uploadedFiles = null;
                 this.nombre = this.User.nombre;
@@ -155,11 +161,7 @@ export class PerfilClienteComponent implements OnInit {
                 this.hide = true;
                 this.hide1 = true;
                 this.contra = "";
-                this.Usuario.nombre = this.nombre
-                this.Usuario.apellido = this.apellido
-                this.Usuario.fecha_nacimiento = date
-                this.Usuario.pais = this.pais
-                this.Usuario.foto = this.urlfoto
+
 
 
               })
@@ -170,7 +172,6 @@ export class PerfilClienteComponent implements OnInit {
           });
         } else {
           ////ESTE ME SIRVE SIN DESCARGAR LAS IMAGENES
-          alert("SIN IMAGEN " + this.urlfoto)
           let date = this.fecha.getFullYear() + "/" + (this.fecha.getMonth() + 1) + '/' + this.fecha.getDate();
           this.serviceUpload.Modify(this.nombre, this.apellido, this.pais, this.correo, date, this.contra, this.Usuario.foto)
             .subscribe((res: Perfil) => {
@@ -225,7 +226,12 @@ export class PerfilClienteComponent implements OnInit {
             this.menuItems[0].foto = this.urlfoto
             this.Usuario.foto = this.urlfoto
             //../../proyect2/src/assets/TypNDKHMkv1k8kruQK0Bcz1R.png
+            this.Usuario.nombre = this.nombre
+            this.Usuario.apellido = this.apellido
             let date = this.fecha.getFullYear() + "/" + (this.fecha.getMonth() + 1) + '/' + this.fecha.getDate();
+            this.Usuario.fecha_nacimiento = date
+            this.Usuario.pais = this.pais
+            this.Usuario.foto = this.urlfoto
             this.serviceUpload.Modify(this.nombre, this.apellido, this.pais, this.correo, date, "0000", temporal2[4] + "/" + temporal2[5])
               .subscribe((res: Perfil) => {
                 this.User = res;
@@ -241,11 +247,8 @@ export class PerfilClienteComponent implements OnInit {
                 this.hide = true;
                 this.hide1 = true;
                 this.contra = "";
-                this.Usuario.nombre = this.nombre
-                this.Usuario.apellido = this.apellido
-                this.Usuario.fecha_nacimiento = date
-                this.Usuario.pais = this.pais
-                this.Usuario.foto = this.urlfoto
+
+
 
 
               })
@@ -299,6 +302,15 @@ export class PerfilClienteComponent implements OnInit {
 
     }
 
+  }
+  cerrarSesion(){
+    localStorage.removeItem("usuarioLogeado");
+    this.route.navigate(['']);
+    window.localStorage.removeItem('usuarioLogeado');
+    let userString = JSON.stringify(this.Usuario);
+    window.localStorage.removeItem(userString);
+    window.localStorage.clear();
+    
   }
 }
 

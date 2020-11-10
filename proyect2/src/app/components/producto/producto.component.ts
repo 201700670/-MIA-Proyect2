@@ -4,7 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UploadService } from 'src/app/services/upload.service';
 import { Perfil } from '../models/perfil';
+import { Producto } from '../models/producto';
 import { AgregarComponent } from './crud-producto/agregar/agregar.component';
+import { DescripcionComponent } from './crud-producto/descripbreve/descripcion/descripcion.component';
+import { ModificarproductoComponent } from './crud-producto/modificar/modificarproducto/modificarproducto.component';
 
 @Component({
   selector: 'app-producto',
@@ -13,7 +16,10 @@ import { AgregarComponent } from './crud-producto/agregar/agregar.component';
 })
 export class ProductoComponent implements OnInit {
   Usuario: Perfil = this.userService.getUser();
-  breakpoint: number;;
+  breakpoint: number;
+  allProduct: Producto[]=[];
+  i;
+  des;
   menuItems: MenuItem[] = [
     {
       label: this.Usuario.nombre + " " + this.Usuario.apellido,
@@ -29,6 +35,11 @@ export class ProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.breakpoint = (window.innerWidth <= 450) ? 1 : 3;
+    this.userService.mostrarProducto(this.Usuario.id).subscribe((res:Producto[]) => {
+      this.allProduct=res;
+      
+    });
+    
   }
   onResize(event) {
     this.breakpoint = (window.innerWidth <= 450) ? 1 : 3;
@@ -37,7 +48,33 @@ export class ProductoComponent implements OnInit {
   agregarProducto() {
     this.dialog.open(AgregarComponent);
   }
-
+  descripcionProducto(item) {
+    this.dialog.open(DescripcionComponent, {
+      data: this.allProduct[item]
+      
+    });
+  }
+  modificarProducto(item) {
+    this.dialog.open(ModificarproductoComponent, {
+      data: this.allProduct[item]
+    });
+  }
+  eliminarProducto(item){
+    this.userService.eliminarProducto(this.allProduct[item].id).subscribe((res) => {
+      alert(res['msg'])
+      location.reload();
+    });
+    
+  }
+  cerrarSesion(){
+    localStorage.removeItem("usuarioLogeado");
+    this.route.navigate(['']);
+    window.localStorage.removeItem('usuarioLogeado');
+    let userString = JSON.stringify(this.Usuario);
+    window.localStorage.removeItem(userString);
+    window.localStorage.clear();
+    
+  }
 }
 export interface MenuItem {
   label: string;

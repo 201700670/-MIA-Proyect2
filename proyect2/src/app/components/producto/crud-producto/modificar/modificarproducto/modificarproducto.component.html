@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>INGRESA TUS PRODUCTOS</h1>
+<h1 mat-dialog-title>MODIFICA TUS PRODUCTOS</h1>
 <div mat-dialog-content>
 
 <div class="content" fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">
@@ -43,7 +43,7 @@
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
     <input
-      placeholder="Palabras claves... Ingresa o elige la palabra "
+      placeholder="Agrega más palabras clave para tu producto"
       #fruitInput
       [formControl]="fruitCtrl"
       [matAutocomplete]="auto"
@@ -67,8 +67,9 @@
 
 </div>
 <div mat-dialog-actions fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">
-    <a mat-button id="boton_1" type="submit" (click)="Result()">Agregar</a>
+    <a mat-button id="boton_1" type="submit" (click)="Result()">Modificar</a>
     <a mat-button mat-dialog-close id="boton_1" type="submit">Cancelar</a>
 </div>
 
 <br>
+

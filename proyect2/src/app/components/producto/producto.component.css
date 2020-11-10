@@ -18,8 +18,8 @@
     border-radius:150px;
   }
   #imgRedonda2 {
-    width:150px;
-    height:150px;
+    width:50px;
+    height:50px;
     border-radius:150px;
   }
 
@@ -121,12 +121,10 @@
     padding: 3px;
     padding-left: 30px;
     padding-right: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 0.5%;
+    margin-top: 5%;
     font-family: 'Times New Roman';
     font-weight: 700;
-    font-size: 16px;
+    font-size: 12px;
     color: #ffd30f;
     border-radius: 15px;
     border: 3px double #ffd30f;
@@ -200,10 +198,21 @@ mat-grid-tile {
   margin-left: 10px;
 }
 #tam{
-  font-size: small;
+  font-size: 13px;
   margin-top: 5px;
 }
 #tam2{
   font-size: 12px;
   margin-left: 5%;
+}
+#card3{
+  height: 100%;
+  width: 100%;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-top: 1%;
+  margin-block-end: 1%;
+ -webkit-box-shadow: 2px 3px 5px 0px rgba(44, 40, 40, 0.75);
+ -moz-box-shadow: 2px 3px 5px 0px rgba(39, 36, 36, 0.75);
+ box-shadow: 2px 3px 5px 0px rgba(17, 17, 17, 0.75);
 }

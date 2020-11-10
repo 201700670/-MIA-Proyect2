@@ -3,13 +3,13 @@
 <mat-toolbar fxLayout="row" id="navegation">
     <span fxFlex>GTSales Marketplace</span>
     <button mat-button>
-        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">store</mat-icon>Inicio</a>
+        <a class="nav-link" id="homes "href="Publicacion"><mat-icon aria-hidden="false" aria-label="Example home icon">store</mat-icon>Inicio</a>
     </button>
     <button mat-button  *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
         [fxShow.sm]="item.showOnTablet">
         <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
     </button>
-    <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+    <button mat-button (click)="cerrarSesion()" *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
         [fxShow.sm]="item.showOnTablet">
         <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">power_settings_new</mat-icon>Cerrar Sesion</a>
     </button>
@@ -32,7 +32,7 @@
                         <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
                     </button>
                 </div>
-                <button mat-menu-item  [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
+                <button mat-menu-item  (click)="cerrarSesion()" [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
                     [fxShow.sm]="!item.showOnTablet">
                         <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">power_settings_new</mat-icon>Cerrar Sesion</a>
                 </button>
@@ -60,79 +60,21 @@
     <br>
     <mat-card id="card1" fxShow.xs="100%" fxFlex.sm="99%">
     <h1 fxFlex.sm="100%"id="card"> <mat-icon aria-hidden="false" > shopping_basket</mat-icon> Tus Productos Subidos</h1>
-        <mat-grid-list id="gridcolor"cols="2" rowHeight="180px" [cols]="breakpoint" (window:resize)="onResize($event)">
-            <mat-grid-tile >
-                <ng-container *ngFor="let item of menuItems">
-                    <mat-card >
-                    <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
-                    <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
-             </mat-card>
-                </ng-container>
+        <mat-grid-list id="gridcolor"cols="2" rowHeight="250px" [cols]="breakpoint" (window:resize)="onResize($event)">
+            
+            <mat-grid-tile *ngFor="let product of allProduct;let i=index;">
+                     <mat-card id="card3">
+                     <img id='imgRedonda2' src=" {{product.foto}}" class="img-fluid" alt="No image">
+                     <br><div id="tam">
+                     {{product.nombre}}<br>
+                     Precio: Q{{product.precio}}<br>
+                     </div>
+                        <a (click)="descripcionProducto(i)"color="info" id="boton_2" type="submit">DESCRIPCION</a>
+                        <a (click)="modificarProducto(i)" color="info" id="boton_2" type="submit">MODIFICAR</a>
+                        <a (click)="eliminarProducto(i)" color="info" id="boton_2" type="submit">ELIMINAR</a>
+                    </mat-card>
             </mat-grid-tile>
-            <mat-grid-tile >
-                <ng-container *ngFor="let item of menuItems">
-                     <mat-card >
-                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
-                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
-            </mat-card>
-                </ng-container>
-            </mat-grid-tile>
-            <mat-grid-tile >
-                <ng-container *ngFor="let item of menuItems">
-                     <mat-card >
-                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
-                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
-            </mat-card>
-                </ng-container>
-            </mat-grid-tile>
-            <mat-grid-tile >
-                <ng-container *ngFor="let item of menuItems">
-                     <mat-card >
-                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
-                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
-            </mat-card>
-                </ng-container>
-            </mat-grid-tile>
-            <mat-grid-tile >
-                <ng-container *ngFor="let item of menuItems">
-                     <mat-card >
-                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
-                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
-            </mat-card>
-                </ng-container>
-            </mat-grid-tile>
-            <mat-grid-tile >
-                <ng-container *ngFor="let item of menuItems">
-                     <mat-card >
-                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
-                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
-            </mat-card>
-                </ng-container>
-            </mat-grid-tile>
-            <mat-grid-tile >
-                <ng-container *ngFor="let item of menuItems">
-                     <mat-card >
-                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
-                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
-            </mat-card>
-                </ng-container>
-            </mat-grid-tile>
-            <mat-grid-tile >
-                <ng-container *ngFor="let item of menuItems">
-                     <mat-card >
-                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
-                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
-            </mat-card>
-                </ng-container>
-            </mat-grid-tile>
-            <mat-grid-tile >
-                <ng-container *ngFor="let item of menuItems">
-                     <mat-card >
-                     <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
-                        <a href="login" color="info" id="boton_2" type="submit">LOGIN</a>
-            </mat-card>
-                </ng-container>
-            </mat-grid-tile>
+            
         </mat-grid-list>
     </mat-card>
 </div>
