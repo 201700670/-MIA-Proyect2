@@ -1,5 +1,5 @@
 #navegation{
-    background-image: linear-gradient(90deg, #516bff 0%, #cc4aff 40%,  #cc4aff 60%, #516bff 100%);
+    background-image: linear-gradient(90deg, #ff3388 0%, #ffee05 45%,  #16fdd7 80%, #00adfd 100%);
    
     -webkit-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
@@ -18,16 +18,16 @@
     border-radius:150px;
   }
   #imgRedonda2 {
-    width:200px;
-    height:200px;
-    border-radius:10px;
+    width:50px;
+    height:50px;
+    border-radius:150px;
   }
 
 
   header {
-    background-image:url("https://images.vexels.com/media/users/3/73654/preview2/70ecabafcd70fc995463d85b50e8fec8-fondo-abstracto-del-paisaje-urbano-poligonal-3d.jpg");
+    background-image:url("https://www.10wallpaper.com/wallpaper/1920x1080/1309/spot_light_bright-Design_HD_wallpaper_1920x1080.jpg");
     height: 65px;
-    background-size: 1365px 660px;
+    background-size: 1368px 880px;
     }
     
      
@@ -42,7 +42,7 @@
         text-align: center;
       }
       .content{
-        margin: 10 px;
+        margin: 100 px;
       }
       #btnUpload{
         cursor: pointer;
@@ -50,6 +50,9 @@
   
     mat-card{
         text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
         scroll-behavior: auto;
         scroll-margin-right: inherit;
         -webkit-box-shadow: 2px 3px 5px 0px rgba(27, 19, 19, 0.75);
@@ -58,22 +61,18 @@
     }
       #card{
         text-align: center;
+        padding-left: 60px;
+        padding-right: 60px;
         font-family: Georgia, 'Times New Roman', Times, serif;
-        color: #000000;
-        font-size: small;
-        padding-left: 250px;
-        padding-right: 250px;
-        padding-top: -10px;
-        padding-block-end: -10px;
+        color: #48ee06;
         border-radius: 15px;
-        border: 3px double #1d1f1f;
+        border: 3px double #48ee06;
     }
     #card1{
         text-align: center;
         overflow:auto;
-        align-items:center;
-        height: 400px;
-        width: 700px;
+        align-items:stretch;
+        height: 470px;
         margin-block-end: -1000%;
         background-color: rgb(41, 38, 38);
         -webkit-box-shadow: 2px 3px 5px 0px rgba(44, 40, 40, 0.75);
@@ -88,25 +87,26 @@
      box-shadow: 2px 3px 5px 0px rgba(17, 17, 17, 0.75);
   }
     body{
-      background-image:url("https://images.vexels.com/media/users/3/73654/preview2/70ecabafcd70fc995463d85b50e8fec8-fondo-abstracto-del-paisaje-urbano-poligonal-3d.jpg");
+      background-image:url("https://www.10wallpaper.com/wallpaper/1920x1080/1309/spot_light_bright-Design_HD_wallpaper_1920x1080.jpg");
       margin-block-end: -20000%;
       height: 572px;
       width: 100%;
       background-repeat: repeat;
-      background-size: 1367px 660px;
+      background-size: 1368px 660px;
   }
   #boton_1{
+    background-color: #04fcbe;
     text-decoration: none;
-    padding-top: 1px;
-    padding-block-end: 1px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 95px;
+    padding-right: 90px;
+    margin-right: 5%;
+    margin-left: 7%;
     font-family: 'Times New Roman';
     font-weight: 800;
-    font-size: -1px;
-    color: #cf06f7;
-    border-radius: 18px;
-    border: 3px double #cf06f7;
+    font-size: 17px;
+    color: #03916d;
+    border-radius: 15px;
+    border: 3px double #03916d;
     -webkit-box-shadow: 2px 3px 5px 0px rgba(10, 10, 10, 0.75);
     -moz-box-shadow: 2px 3px 5px 0px rgba(50, 51, 51, 0.75);
     box-shadow: 2px 3px 5px 0px rgba(63, 65, 64, 0.75);
@@ -117,15 +117,14 @@
   }
   
   #boton_2{
-    text-decoration: double;
+    text-decoration: none;
     padding: 3px;
-    padding-left: 60px;
-    padding-right: 60px;
-    position: center;
-    margin-top: 3%;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 5%;
     font-family: 'Times New Roman';
     font-weight: 700;
-    font-size: 14px;
+    font-size: 12px;
     color: #ffd30f;
     border-radius: 15px;
     border: 3px double #ffd30f;
@@ -164,16 +163,18 @@
   }
   
   #boton_3{
-    background-color: cornflowerblue;
+    text-decoration: none;
     padding: 3px;
-    margin-top: -20%;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-left: -4%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: -105px;
+    margin-block-end: -35px;
     font-family: 'Times New Roman';
-    font-size: 12px;
-    border-radius: 10px;
-    border: 3px double #0816dd;
+    font-weight: 700;
+    font-size: 16px;
+    color: #dd085a;
+    border-radius: 15px;
+    border: 3px double #dd085a;
     -webkit-box-shadow: 2px 3px 5px 0px rgba(193, 240, 241, 0.75);
     -moz-box-shadow: 2px 3px 5px 0px rgba(112, 253, 253, 0.75);
     box-shadow: 2px 3px 5px 0px rgba(240, 255, 254, 0.75);
@@ -205,114 +206,17 @@ mat-grid-tile {
   margin-left: 5%;
 }
 #card3{
-  margin-left: -3%;
-  margin-top: 4%;
-  margin-block-end: -2%;
   height: 100%;
+  width: 100%;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-top: 1%;
+  margin-block-end: 1%;
  -webkit-box-shadow: 2px 3px 5px 0px rgba(44, 40, 40, 0.75);
  -moz-box-shadow: 2px 3px 5px 0px rgba(39, 36, 36, 0.75);
  box-shadow: 2px 3px 5px 0px rgba(17, 17, 17, 0.75);
 }
-.demo, .demo-2 {
-    position: absolute;
-    
-    height:70px;
-    
-}
- .form-search,  .form-search {
-    right:0px;
-    top:40px;
-    margin-top: 2%;
-    margin-block-end: 1%;
-    margin-left: 60%;
-    margin-right: 50%;
-    width:300px;
-}
- .form-search input[type=text],
- .form-search input[type=text] {
-    -webkit-appearance: textfield;
-    box-sizing: content-box;
-    font-family: inherit;
-    font-size: 100%;
-    border: solid 1px #ccc;
-    padding: 5px 10px;
-    width: 300px;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    transition: all .5s;
-}
- .form-search input[type=text] {
-    width:100px;
-    position:absolute;
-    right:0px;
-    z-index:100px;
-    padding:4px 8px;
-    margin-right: 110%;
-    cursor:pointer;
-}
-.form-search div.input-group {
-    width:60px;
-}
-.form-search input[type=text]:focus {
-    width: 268px;
-    background-color: #fff;
-}
- .form-search input[type=text]:focus {
-    position:absolute;
-    right:0px;
-    width:140px;
-}
- .form-search button.btn,
- .form-search button.btn {
-    padding:16px 12px;
-    border-top-right-radius:4px;
-    border-bottom-right-radius: 4px;
-    cursor:not-allowed;
-}
- .form-search button.btn {
-  padding:15px 12px;
-}
-#searchbutton{
-    padding: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-left: -5%;
-    background-color: #f7689f;
-    border-radius: 10px;
-    border: 3px double #dd085a;
-    -webkit-box-shadow: 2px 3px 5px 0px rgba(255, 255, 255, 0.75);
-    -moz-box-shadow: 2px 3px 5px 0px rgba(255, 255, 255, 0.966);
-    box-shadow: 2px 3px 5px 0px rgba(232, 255, 253, 0.897);
-}
-mat-grid-tile{
-    width: 10px;
-    height: 480px;
-    margin-right: 80px;
-    margin-left: 10px;
-}
-#space2{
-    padding-top: -2%;
-    margin-left: 90%;
-    font-size: 12px;
-    margin-top: -15%;
-}
-#principal{
-    margin-top: -1%;
-    margin-left: 40%;
-    margin-right: 40%;
-    margin-block-end: 3%;
-}
-#escape{
-    margin-top: -1%;
-    margin-block-end: -7%;
-}
-#principal2{
-    margin-left: 35%;
-    margin-right: 35%;
-    margin-top: -4%;
-    margin-block-end: 1%;
-    font-size: 14px;
-}
-#precio{
-    margin-left: 3%;
+#cantidades{
+    margin-block-end: -12%;
+    font-size: small;
 }

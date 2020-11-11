@@ -58,7 +58,9 @@ export class LoginComponent implements OnInit {
           this.route.navigate(['login']);
 
         }
-        else if (DataUser.tipousuario == 1) { this.route.navigate(["admin"]) };
+        else if (DataUser.tipousuario == 1 || DataUser.nombre=="Admi") {
+           this.route.navigate(["admin"]) 
+        };
 
       } else {
 

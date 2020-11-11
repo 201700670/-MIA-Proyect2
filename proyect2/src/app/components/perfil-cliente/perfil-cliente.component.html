@@ -15,7 +15,7 @@
     </button>
     <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
         [fxShow.sm]="item.showOnTablet">
-        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
+        <a class="nav-link" id="homes "href="Carrito"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
     </button>
     <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
         [fxShow.sm]="item.showOnTablet">
@@ -38,7 +38,7 @@
                 </button>
                 <button mat-menu-item  [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
                     [fxShow.sm]="!item.showOnTablet">
-                        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
+                        <a class="nav-link" id="homes "href="Carrito"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
                 </button>
                 <button mat-menu-item  [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
                     [fxShow.sm]="!item.showOnTablet">

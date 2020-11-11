@@ -1,0 +1,56 @@
+
+<header>
+<mat-toolbar fxLayout="row" id="navegation">
+    <span fxFlex>GTSales Marketplace</span>
+    
+    <button mat-button  *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+    </button>
+    <button mat-button (click)="cerrarSesion()" *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+        [fxShow.sm]="item.showOnTablet">
+        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">power_settings_new</mat-icon>Cerrar Sesion</a>
+    </button>
+    
+    <ng-container>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>dehaze</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <ng-container *ngFor="let item of menuItems">
+                <div [fxShow]="!item.showOnDesktop" [fxShow.sm]="!item.showOnTablet" [fxShow.xs]="!item.showOnMobile">
+                    <button mat-menu-item >
+                        <a class="nav-link" id="homes "href="{{item.ruta}}"><img id='imgRedonda' src=" {{item.foto}}" class="img-fluid" alt="No image"> {{item.label}}</a>
+                    </button>
+                </div>
+                <button mat-menu-item (click)="cerrarSesion()" [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
+                    [fxShow.sm]="!item.showOnTablet">
+                        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">power_settings_new</mat-icon>Cerrar Sesion</a>
+                </button>
+            </ng-container>
+        </mat-menu>
+    </ng-container>
+</mat-toolbar>
+</header>
+
+<body>
+    <br><br>
+    <div class="content" fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">  
+  <div>
+    <mat-card id="card1" fxFlex="200%" fxFlex.sm="100%">
+    <mat-card width="100%">
+    <h3 id="card"><mat-icon aria-hidden="false" aria-label="Example home icon">add_business</mat-icon> Agregar Categorías</h3>
+    </mat-card>
+    <br>
+         <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label id="espacio">Nombre</mat-label>
+          <input  matInput [(ngModel)]="categoria" name="categoria" placeholder="Ingrese su nombre">
+         </mat-form-field>
+        <br>
+        <a color="info" id="boton_1" type="submit" (click)="addCategoria()">AGREGAR CATEGORIA</a>
+        <br>
+        <br>
+    </mat-card>
+</div>
+</div>
+</body>

@@ -14,12 +14,51 @@ export class CarroService {
   ///////////////////////////////////////CONSULTAS///////////////////////////////////////////
   crearCarro(usuario:number)
   {
-    console.log("MIRAME MIRAME MIRAME  ", usuario)
     return this.http.post('http://192.168.1.15:3000/crear/carro',
     {
        "usuario":usuario
        
     }, { headers: this.headers })
      .pipe(map(data => data));
+  }
+  VerificarProducto(producto, usuario){
+    //este me servira para saber si ya existe en el carrito de compras(detalle_compras)
+    const url = "http://192.168.1.15:3000/VerificarProducto";
+    return this.http.post(url,
+      {
+        "producto": producto,
+        "usuario": usuario
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  AddCarrito(subtotal, producto, idcompra){
+    const url = "http://192.168.1.15:3000/addCarrito";
+    return this.http.post(url,
+      {
+        "subtotal": subtotal,
+        "producto": producto,
+        "idcompra": idcompra
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  getIdCarrito(usuario) {
+    const url = "http://192.168.1.15:3000/idCarrito";
+    return this.http.post(url,
+      {
+        "usuario": usuario
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  mostrarCarrito(usuario) {
+    const url = "http://192.168.1.15:3000/mostrarCarrito";
+    return this.http.post(url,
+      {
+        "usuario": usuario
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
   }
 }

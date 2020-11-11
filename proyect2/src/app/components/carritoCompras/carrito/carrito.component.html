@@ -55,11 +55,11 @@
     <div class="content" fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">  
     
   <div>
-  <a id="card" color="info" id="boton_1" type="submit"  (click)="agregarProducto()" ><mat-icon aria-hidden="false" aria-label="Example home icon">playlist_add</mat-icon>  AGREGA TUS PRODUCTOS</a>
+  <a id="card" color="info" id="boton_1" type="submit"  (click)="agregarProducto()" ><mat-icon aria-hidden="false" aria-label="Example home icon">playlist_add</mat-icon>  COMPRAR</a>
     <br>
     <br>
     <mat-card id="card1" fxShow.xs="100%" fxFlex.sm="99%">
-    <h1 fxFlex.sm="100%"id="card"> <mat-icon aria-hidden="false" > shopping_basket</mat-icon> Tus Productos Subidos</h1>
+    <h1 fxFlex.sm="100%"id="card"> <mat-icon aria-hidden="false" >shopping_bag</mat-icon> Tus Productos de Carrito</h1>
         <mat-grid-list id="gridcolor"cols="2" rowHeight="250px" [cols]="breakpoint" (window:resize)="onResize($event)">
             
             <mat-grid-tile *ngFor="let product of allProduct;let i=index;">
@@ -69,8 +69,11 @@
                      {{product.nombre}}<br>
                      Precio: Q{{product.precio}}<br>
                      </div>
+                        <mat-form-field class="example-right-align" id="cantidades" appearance="fill" [style.width.px]=100 >
+                            <mat-label>Cantidad</mat-label>
+                                <input matInput id="cantidad" type="number" value={{product.cantidad}} required>
+                        </mat-form-field>
                         <a (click)="descripcionProducto(i)"color="info" id="boton_2" type="submit">DESCRIPCION</a>
-                        <a (click)="modificarProducto(i)" color="info" id="boton_2" type="submit">MODIFICAR</a>
                         <a (click)="eliminarProducto(i)" color="info" id="boton_2" type="submit">ELIMINAR</a>
                     </mat-card>
             </mat-grid-tile>

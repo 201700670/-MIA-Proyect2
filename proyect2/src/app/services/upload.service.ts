@@ -140,6 +140,15 @@ export class UploadService {
     const url = "http://192.168.1.15:3000/ListCategoria";
     return this.http.get(url);
   }
+  AddCategoria(nombre){
+    const url = "http://192.168.1.15:3000/addCategoria";
+    return this.http.post(url,
+      {
+        "nombre": nombre
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
   AddProducto(nombre: string, precio: number, foto: string, descripcion: string, estado: number, categoria: string) {
     const url = "http://192.168.1.15:3000/addProducto";
     return this.http.post(url,
@@ -262,6 +271,87 @@ export class UploadService {
       , { headers: this.headers })
       .pipe(map(data => data));
   }
+  ClavePublicacion(usuario, palabra_clave){
+    const url = "http://192.168.1.15:3000/ClavesPublicacion";
+    return this.http.post(url,
+      {
+        "usuario": usuario,
+        "palabra_clave": palabra_clave
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  ListaPalabraClaveProducto() {
+    const url = "http://192.168.1.15:3000/palabrasclaveProducto";
+    return this.http.get(url);
+  }
+  AddComentario(producto, usuario) {
+
+    const url = "http://192.168.1.15:3000/addComentario";
+    return this.http.post(url,
+      {
+        "producto": producto,
+        "usuario": usuario
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  getIdComentario(producto, usuario) {
+
+    const url = "http://192.168.1.15:3000/idComentario";
+    return this.http.post(url,
+      {
+        "producto": producto,
+        "usuario": usuario
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  getIdDenuncia(producto, usuario) {
+
+    const url = "http://192.168.1.15:3000/idDenuncia";
+    return this.http.post(url,
+      {
+        "producto": producto,
+        "usuario": usuario
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  AddDenuncia(producto, usuario) {
+
+    const url = "http://192.168.1.15:3000/addDenuncia";
+    return this.http.post(url,
+      {
+        "producto": producto,
+        "usuario": usuario
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  getIdVendedor(idproducto) {
+    const url = "http://192.168.1.15:3000/getIdVendedor";
+    return this.http.post(url,
+      {
+        "idproducto": idproducto
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  addPublicacion(likes,visibilidad, producto,comentario,denuncia){
+    const url = "http://192.168.1.15:3000/addPublicacion";
+    return this.http.post(url,
+      {
+        "likes": likes,
+        "visibilidad": visibilidad,
+        "producto": producto,
+        "comentario": comentario,
+        "denuncia": denuncia
+      }
+      , { headers: this.headers })
+      .pipe(map(data => data));
+  }
+  
   //////////////////////////////////////LOCAL STORAGE /////////////////////////////////////
   setUser(user: Perfil) {
     let userString = JSON.stringify(user);

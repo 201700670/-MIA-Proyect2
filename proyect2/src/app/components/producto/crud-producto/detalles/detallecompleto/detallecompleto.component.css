@@ -1,0 +1,133 @@
+#boton_1{
+    margin-top: 5%;
+    text-decoration: none;
+    padding: 1px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 20px;
+    font-family: 'Times New Roman';
+    font-weight: 700;
+    font-size: 16px;
+    color: #b5f506;
+    border-radius: 15px;
+    border: 3px double #b5f506;
+    -webkit-box-shadow: 2px 3px 5px 0px rgba(193, 240, 241, 0.75);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(112, 253, 253, 0.75);
+    box-shadow: 2px 3px 5px 0px rgba(240, 255, 254, 0.75);
+  }
+
+  #boton_1:hover{
+    opacity: 0.6;
+    text-decoration: none;
+  }
+  #textoencima{
+
+      position: relative;
+      margin-top: -15%;
+  }
+/* Invisible texto */
+figcaption {
+    display:none; 
+    transition: all .5s;
+  }
+  /* Visible texto */
+  figure:hover > figcaption {
+    display:block;
+    transition: all .5s;
+  }
+.share{
+    display:block;
+    width:60px;
+    height:60px;
+    background:#ff9100;
+    border: 3px double #924608;
+    top:450px;
+    left:50%;
+    z-index:999;
+    text-align:center;
+    overflow:hidden;
+    line-height:65px;
+    font-size:1.5em;
+    color:#fff;
+    -webkit-box-shadow: 2px 3px 5px 0px rgba(193, 240, 241, 0.75);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(112, 253, 253, 0.75);
+    box-shadow: 2px 3px 5px 0px rgba(240, 255, 254, 0.75);
+    border-radius:50px;
+    -webkit-transform:translate(-10%,-10%);
+    transform:translate(-20%,-100%);
+  }
+  
+  .share:hover{
+    
+    opacity: 0.6;
+    cursor:pointer;
+  }
+  
+  .one, .two, .three, .four{
+    position:absolute;
+    width:50px;
+    height:50px;
+    color:#fff;
+    border-radius:40px;
+    text-align:center;
+    line-height:49px;
+    font-size:1.5em;
+     top:450px;
+     -webkit-transform:translate(-100%,-100%);
+    transform:translate(-20%,-620%);
+    -webkit-box-shadow: 0px 3px 9px rgba(0,0,0,.2);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(8, 8, 8, 0.75);
+    box-shadow: 0px 3px 9px rgba(0,0,0,.2);
+    -webkit-transition:transform  .3s ease-in-out;
+    transition:transform .3s ease-in-out;
+  }
+  
+  .one:hover, 
+  .two:hover,
+  .three:hover,
+  .four:hover{
+    opacity: 0.6;
+    cursor:pointer;
+  }
+
+  
+  
+  .one i, .two i, .three i, .four i{
+    display:none;
+  }
+  
+  
+  .one{
+    background:#2196f3;
+  }
+  
+  .two{
+    background:#06ce8b;
+  }
+  
+  .three{
+    background:#7bff00;
+  }
+  .four{
+    background:#ff008c;
+  }
+
+  #imgRedonda {
+    width:120px;
+    height:120px;
+
+    margin-left: 40%;
+    margin-right: 40%;
+    border-radius:12px;
+}
+#card2{
+    margin-left: 4%;
+    margin-right: 4%;
+    background-color: rgb(37, 36, 36);
+   -webkit-box-shadow: 2px 3px 5px 0px rgba(2, 2, 2, 0.75);
+   -moz-box-shadow: 2px 3px 5px 0px rgba(15, 14, 14, 0.75);
+   box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.75);
+}
+#pos{
+    text-align: center;
+}

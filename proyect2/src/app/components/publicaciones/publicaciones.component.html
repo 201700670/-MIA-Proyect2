@@ -15,7 +15,7 @@
     </button>
     <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
         [fxShow.sm]="item.showOnTablet">
-        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
+        <a class="nav-link" id="homes "href="Carrito"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
     </button>
     <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
         [fxShow.sm]="item.showOnTablet">
@@ -38,7 +38,7 @@
                 </button>
                 <button mat-menu-item  [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
                     [fxShow.sm]="!item.showOnTablet">
-                        <a class="nav-link" id="homes "href="#"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
+                        <a class="nav-link" id="homes "href="Carrito"><mat-icon aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>Mi carreta</a>
                 </button>
                 <button mat-menu-item  [fxShow]="!item.showOnDesktop" [fxShow.xs]="!item.showOnMobile" 
                     [fxShow.sm]="!item.showOnTablet">
@@ -111,9 +111,8 @@
                         {{product.nombre}}<br>
                         Precio: Q{{product.precio}}<br>
                      </div>
-                        <a (click)="descripcionProducto(i)"color="info" id="boton_2" type="submit">DESCRIPCION</a>
-                        <a (click)="modificarProducto(i)" color="info" id="boton_2" type="submit">MODIFICAR</a>
-                        <a (click)="eliminarProducto(i)" color="info" id="boton_2" type="submit">ELIMINAR</a>
+                        <a (click)="descripcionProducto(i)"color="info" id="boton_2" type="submit">DETALLES</a><br>
+                        <a (click)="addCarritoProducto(i)" color="info" id="boton_2" type="submit"><mat-icon  aria-hidden="false" aria-label="Example home icon">add_shopping_cart</mat-icon>AGREGAR A CARRITO</a>
                     </mat-card>
             </mat-grid-tile>
             

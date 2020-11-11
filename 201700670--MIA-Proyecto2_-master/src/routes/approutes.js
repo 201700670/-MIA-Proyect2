@@ -443,4 +443,182 @@ approut.post('/CategoriaPublicacion', async (req, res) => {
     });
     res.status(200).json(Producto);
 });
+approut.post('/ClavesPublicacion', async (req, res) => {
+    const { usuario, palabra_clave } = req.body;
+    console.log(usuario, palabra_clave);
+    sql = 'select producto.idproducto, producto.nombre, producto.precio, producto.foto, producto.detalle_producto,\
+    producto.estado, producto.categoria from producto \
+    inner join  detalle_venta on detalle_venta.producto=producto.idproducto\
+    inner join  venta on venta.idventa= detalle_venta.venta\
+    inner join palabra_clave on palabra_clave.producto=producto.idproducto\
+    where venta.usuario!=:usuario and producto.estado=1 and palabra_clave.nombre=:palabra_clave';
+    let result = await BD.Open(sql, [usuario,palabra_clave], true);
+    Producto = []
+    result.rows.map(producto => {
+        let productoSchema = {
+            "id": producto[0],
+            "nombre": producto[1],
+            "precio": producto[2],
+            "foto": producto[3],
+            "detalle_producto": producto[4],
+            "estado": producto[5],
+            "categoria": producto[6]
+        }
+
+        Producto.push(productoSchema);
+    });
+    res.status(200).json(Producto);
+});
+approut.post("/getIdVendedor", async (req, res) => {
+    const { idproducto } = req.body;
+    sql = "select usuario from venta\
+    inner join  detalle_venta on venta.idventa= detalle_venta.venta \
+    inner join  producto on producto.idproducto= detalle_venta.producto\
+    where producto.idproducto=:idproducto";
+    let result = await BD.Open(sql, [idproducto], false);
+    console.log(result);
+    res.status(200).send(result.rows);
+})
+approut.post("/addComentario", async (req, res) => {
+    const { producto,usuario } = req.body
+    console.log(req.body);
+    sql = 'INSERT INTO COMENTARIO (coment,fecha_comentario,producto,usuario)values(null, null, :producto, :usuario)';
+    await BD.Open(sql, [producto,usuario], true);
+    res.status(200).json("todo ok");
+
+})
+approut.post("/idComentario", async (req, res) => {
+    const { producto,usuario } = req.body
+    console.log(req.body);
+    sql = 'select idcomentario from comentario where producto=:producto and usuario=:usuario';
+    let result=await BD.Open(sql, [producto,usuario], true);
+    res.status(200).json({
+        id: result.rows[0][0]
+    });
+
+})
+approut.post("/idDenuncia", async (req, res) => {
+    const { producto,usuario } = req.body
+    console.log(req.body);
+    sql = 'select iddenuncia from denuncia where producto=:producto and usuerdenuncia=:usuario';
+    let result=await BD.Open(sql, [producto,usuario], true);
+    res.status(200).json({
+        id: result.rows[0][0]
+    });
+
+})
+approut.post("/addDenuncia", async (req, res) => {
+    const { producto,usuario } = req.body
+    console.log(req.body);
+    sql = 'INSERT INTO DENUNCIA (descripcion,estado,fecha,producto,USUERDENUNCIA)values(null,0,null,:producto,:usuario)';
+    await BD.Open(sql, [producto,usuario], true);
+    res.status(200).json("todo ok");
+
+})
+approut.post("/getidD ", async (req, res) => {
+    const { producto,usuario } = req.body
+    console.log(req.body);
+    sql = 'select iddenuncia from denuncia where producto=:producto and usuerdenuncia=:usuario';
+    let result=await BD.Open(sql, [producto,usuario], false);
+    res.status(200).json
+        ({
+            id: result.rows[0][0]
+        })
+
+})
+approut.post("/getidC ", async (req, res) => {
+    const { producto,usuario } = req.body
+    console.log(req.body);
+    sql = 'select idcomentario from comentario where producto=:producto and usuario=:usuario';
+    let result=await BD.Open(sql, [producto,usuario], false);
+    res.status(200).json
+        ({
+            id: result.rows[0][0]
+        })
+
+})
+
+approut.post("/addPublicacion", async (req, res) => {
+    const { likes,visibilidad, producto,comentario,denuncia } = req.body
+    console.log(req.body);
+    sql = 'INSERT INTO publicacion(likes,visibilidad, producto,comentario,denuncia)VALUES(:likes,:visibilidad, :producto,:comentario,:denuncia)';
+    await BD.Open(sql, [likes,visibilidad, producto,comentario,denuncia], true);
+    res.status(200).json("todo ok");
+
+})
+
+approut.post("/addCategoria", async (req, res) => {
+    const { nombre } = req.body
+    console.log(req.body);
+    sql = 'INSERT INTO categoria(nombre) VALUES (:nombre)';
+    await BD.Open(sql, [nombre], true);
+    res.status(200).json("Categoria agregada");
+
+})
+approut.post('/VerificarProducto', async (req, res) => {
+    const { producto,usuario } = req.body
+    console.log(req.body);
+    sql = "select iddetalle_compra from detalle_compra \
+    inner join  carrito on carrito.idcarrito= detalle_compra.idcompra\
+    inner join producto on detalle_compra.producto=producto.idproducto\
+    where detalle_compra.estado=1 and producto.idproducto=:producto\
+    and carrito.usuario=:usuario";
+
+    let result=await BD.Open(sql, [producto,usuario], false);
+    try {
+        res.status(200).json
+            ({
+                id: result.rows[0][0]
+            })
+    } catch (error) {
+        res.status(200).json
+            ({
+                id: 0
+            })
+    }
+});
+
+approut.post('/addCarrito', async (req, res) => {
+    console.log(req.body)
+    const { subtotal, producto, idcompra } = req.body;
+    sql = "INSERT INTO detalle_compra(cantidad,subtotal,estado,producto,idcompra)\
+    values(0,:subtotal,1,:producto,:idcompra)";
+    await BD.Open(sql, [subtotal, producto, idcompra], true);
+    res.status(200).json("Producto agregado a carrito");
+});
+approut.post("/idCarrito", async (req, res) => {
+    const {usuario } = req.body
+    console.log(req.body);
+    sql = 'select idcarrito from carrito where usuario=:usuario';
+    let result=await BD.Open(sql, [usuario], true);
+    res.status(200).json({
+        id: result.rows[0][0]
+    });
+})
+approut.post('/mostrarCarrito', async (req, res) => {
+    const { usuario } = req.body;
+    console.log(usuario);
+    sql = 'select producto.idproducto, producto.nombre, producto.precio, \
+    producto.foto, producto.detalle_producto,\
+    producto.estado, producto.categoria from producto \
+    inner join detalle_compra on detalle_compra.producto=producto.idproducto\
+    inner join  carrito on carrito.idcarrito= detalle_compra.idcompra\
+    where detalle_compra.estado=1 and carrito.usuario=:usuario';
+    let result = await BD.Open(sql, [usuario], true);
+    Producto = []
+    result.rows.map(producto => {
+        let productoSchema = {
+            "id": producto[0],
+            "nombre": producto[1],
+            "precio": producto[2],
+            "foto": producto[3],
+            "detalle_producto": producto[4],
+            "estado": producto[5],
+            "categoria": producto[6]
+        }
+
+        Producto.push(productoSchema);
+    });
+    res.status(200).json(Producto);
+});
 module.exports = approut;

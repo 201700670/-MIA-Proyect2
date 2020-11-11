@@ -46,6 +46,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { DescripcionComponent } from './components/producto/crud-producto/descripbreve/descripcion/descripcion.component';
 import { ModificarproductoComponent } from './components/producto/crud-producto/modificar/modificarproducto/modificarproducto.component';
+import { DetallecompletoComponent } from './components/producto/crud-producto/detalles/detallecompleto/detallecompleto.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { InicioComponent } from './components/administrador/inicio/inicio/inicio.component';
+import { CarritoComponent } from './components/carritoCompras/carrito/carrito.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +65,10 @@ import { ModificarproductoComponent } from './components/producto/crud-producto/
     ProductoComponent,
     AgregarComponent,
     DescripcionComponent,
-    ModificarproductoComponent
+    ModificarproductoComponent,
+    DetallecompletoComponent,
+    InicioComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +101,8 @@ import { ModificarproductoComponent } from './components/producto/crud-producto/
     MatMenuModule,
     MatChipsModule,
     MatAutocompleteModule,
-    ScrollingModule
+    ScrollingModule,
+    MatTooltipModule
   ],
   exports:[MatDatepickerModule],
   providers: [UploadService],

@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>{{product.nombre}}</h1>
+<div mat-dialog-content>
+
+<div class="content" fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">
+    <mat-card id="card2">
+          <img id='imgRedonda' [src]="photoSelected || 'assets/newproducto.png'" class="img-fluid" alt="No image">
+         
+       
+                
+        <div matTooltip="Presion acá para accionar el botón" class="share">
+            
+            <mat-icon aria-hidden="false" aria-label="Example home icon">thumbs_up_down</mat-icon>
+        </div>
+        <div matTooltip="Enviar mensaje"class="one">
+            <mat-icon (click)="mensaje()"aria-hidden="false" aria-label="Example home icon">send</mat-icon>
+        </div>
+        <div matTooltip="Agregar al Carrito"class="two">
+            <mat-icon (click)="addCart()" aria-hidden="false" aria-label="Example home icon">add_shopping_cart</mat-icon>
+        </div>
+        <div (click)="dislike()"  matTooltip="No me gusta (hacer doble click para desactivar)"class="three" id="dislikes">
+            <mat-icon class="maticon" aria-hidden="false" aria-label="Example home icon">thumb_down</mat-icon>
+        </div>
+        
+        <div matTooltip="Me encanta" class="four" id="four1">
+            <mat-icon  (click)="like()"aria-hidden="false" aria-label="Example home icon">{{meencanta}}</mat-icon>
+        </div>
+        <a id="pos">
+          {{product.detalle_producto}}
+        </a>
+        <br>
+        <a id="pos">
+          Precio: Q{{product.precio}}
+        </a>
+          <br>
+        <a id="pos">
+          Palabras Clave: {{palabras_clave}}
+        </a>
+          <br>
+          
+    </mat-card>
+</div>
+</div>
+<div mat-dialog-actions fxLayout="row wrap" fxLayout.xs="row wrap"  fxLayoutAlign="space-around center">
+    <a mat-button id="boton_1" type="submit" ><mat-icon aria-hidden="false" aria-label="Example home icon">insert_comment</mat-icon>Comentarios</a>
+    <a mat-button (click)="terminar()" mat-dialog-close id="boton_1" type="submit">Cancelar</a>
+</div>

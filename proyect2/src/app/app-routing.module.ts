@@ -12,6 +12,8 @@ import { ProductGuard } from './guard/product.guard';
 import { PerfilClienteComponent } from './components/perfil-cliente/perfil-cliente.component';
 import { SecurityGuard } from './guard/security.guard';
 import { ProductoComponent } from './components/producto/producto.component';
+import { InicioComponent } from './components/administrador/inicio/inicio/inicio.component';
+import { CarritoComponent } from './components/carritoCompras/carrito/carrito.component';
 const routes: Routes = [
   {
     path: '',
@@ -41,9 +43,17 @@ const routes: Routes = [
     component:  PublicacionesComponent,
   },
   {
+    path: 'Carrito',
+    component:  CarritoComponent,
+  },
+  {
     path: 'PerfilCliente',
     component:PerfilClienteComponent,
     canActivate:[SecurityGuard],
+  },
+  {
+    path: 'admin',
+    component:InicioComponent,
   },
   {
     path: 'ProductoCliente',

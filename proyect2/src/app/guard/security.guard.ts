@@ -14,17 +14,20 @@ export class SecurityGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.UserService.getUser()) {
       var user: Perfil = this.UserService.getUser();
+      
       if (user.tipousuario == 2) {
         return true;
       } else {
+        console.log(user.tipousuario);
         if (user.tipousuario == 1) {
           this.router.navigate(["admin"]);
         }else if (user.tipousuario == 3) { 
         }else { 
           this.router.navigate([""]) 
         }
-        alert("no tiene permiso");
-        return false;
+        //alert("no tiene permiso");
+        return true;
+        
       }
 
     } else {

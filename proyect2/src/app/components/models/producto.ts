@@ -7,5 +7,6 @@ export interface Producto{
     detalle_producto?:string,
     estado?:number,
     palabras_clave?:string,
-    categoria?:string
+    categoria?:string,
+    cantidad?:string
 }

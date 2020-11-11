@@ -7,10 +7,14 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CarroService } from 'src/app/services/carro.service';
+import { CorreoService } from 'src/app/services/correo.service';
 import { UploadService } from 'src/app/services/upload.service';
 import { Perfil } from '../models/perfil';
 import { Producto } from '../models/producto';
+import { Venta } from '../models/venta';
 import { Categoria } from '../producto/crud-producto/agregar/agregar.component';
+import { DetallecompletoComponent } from '../producto/crud-producto/detalles/detallecompleto/detallecompleto.component';
 
 @Component({
   selector: 'app-publicaciones',
@@ -49,10 +53,10 @@ export class PublicacionesComponent implements OnInit {
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   //////////////////////////////////////////////
-  constructor(public dialog: MatDialog, private serviceUpload: UploadService, private route: Router, private http: HttpClient, private active: ActivatedRoute, private userService: UploadService) { }
+  constructor(public dialog: MatDialog, private carroService: CarroService, private route: Router, private http: HttpClient, private active: ActivatedRoute, private userService: UploadService) { }
 
   ngOnInit(): void {
-    this.breakpoint = (window.innerWidth <= 450) ? 1 : 1;
+    this.breakpoint = (window.innerWidth <= 450) ? 1 : 2;
 
     this.userService.mostrarPublicacion(this.Usuario.id).subscribe((res: Producto[]) => {
       this.allProduct = res;
@@ -73,8 +77,26 @@ export class PublicacionesComponent implements OnInit {
   agregarProducto() {
   }
   descripcionProducto(item) {
+    this.dialog.open(DetallecompletoComponent, {
+      data: this.allProduct[item]
+      
+    });
   }
-  modificarProducto(item) {
+  addCarritoProducto(item) {
+    if(confirm('Deseas agregar este producto a tu carrito de compras?')){
+      this.carroService.VerificarProducto(this.allProduct[item].id,this.Usuario.id).subscribe((res:Venta) => {
+        if(res.id!=0){
+          alert("Ya se encuentra este producto en tu carrito de compras");
+        }else{
+          this.carroService.getIdCarrito(this.Usuario.id).subscribe((res:Venta) => {
+              let idCompra=res.id
+              this.carroService.AddCarrito(this.allProduct[item].precio, this.allProduct[item].id,idCompra).subscribe((res) => {
+                alert(res)
+            })
+          })
+        }
+      });
+    }
   }
   eliminarProducto(item) {
     this.userService.eliminarProducto(this.allProduct[item].id).subscribe((res) => {
@@ -110,15 +132,50 @@ export class PublicacionesComponent implements OnInit {
       this.userService.CategoriaPublicacion(this.Usuario.id, this.categoria).subscribe((res: Producto[]) => {
         this.allProduct = res;
       });
-    }else{
+    } else {
       alert("Seleccione una categoría!! ")
     }
   }
-  PalabrasClaveMostrar(){
-    for (let index = 0; index < this.fruits.length; index++) {
-      const palabra = this.fruits[index];
-      console.log(palabra)
-      
+  PalabrasClaveMostrar() {
+    if (this.fruits != null) {
+      this.allProduct = null
+      for (let index = 0; index < this.fruits.length; index++) {
+        const palabra = this.fruits[index];
+        console.log(palabra)
+        this.userService.ClavePublicacion(this.Usuario.id, palabra).subscribe((res: Producto[]) => {
+          
+          for (let i = 0; i < res.length; i++) {
+            const element = res[i];
+            if (this.allProduct == null) {
+              this.allProduct = [element];
+            } else {
+              for (let x = 0; x < this.allProduct.length + 1; x++) {
+                if (this.allProduct[x] != null ) {
+                  console.log(this.allProduct[x].nombre.trim()+" = "+element.nombre.trim())
+                  if (this.allProduct[x].id == element.id && this.allProduct[x].nombre == element.nombre && this.allProduct[x].palabras_clave == element.palabras_clave) {
+                    console.log("ya fue ingresado")
+                    return;
+                  } 
+                } else {
+                  this.allProduct[x]=element;
+                  this.allProduct[x].id = element.id
+                  this.allProduct[x].categoria = element.categoria
+                  this.allProduct[x].detalle_producto = element.detalle_producto
+                  this.allProduct[x].estado = element.estado
+                  this.allProduct[x].foto = element.foto
+                  this.allProduct[x].nombre = element.nombre
+                  this.allProduct[x].palabras_clave = element.palabras_clave
+                  this.allProduct[x].precio = element.precio
+                  return;
+                  //this.allProduct=[element];
+                }
+              }
+            }
+          }
+        });
+      }
+    } else {
+      alert("Ingrese palabras claves!! ")
     }
   }
   ///////////////METODO ADD PARA AGREGAR LOS CHIP DE LAS PALABRAS CLAVES/////////////
